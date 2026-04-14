@@ -1,4 +1,4 @@
-# 🤖 Cyber Threat Intelligence AI Agent
+# Cyber Threat Intelligence AI Agent
 
 An **autonomous AI-powered Cyber Threat Intelligence (CTI) Agent** that collects, correlates, scores, and reports cybersecurity threats from multiple sources and generates professional PDF reports.
 
