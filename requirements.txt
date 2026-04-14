@@ -1,0 +1,9 @@
+langchain
+langchain-google-genai
+langgraph
+langchain-community
+requests
+feedparser
+reportlab
+python-dotenv
+pydantic
