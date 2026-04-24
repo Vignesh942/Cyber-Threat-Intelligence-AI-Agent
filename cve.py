@@ -8,6 +8,7 @@ def fetch_cve_data(days: int = 2):
         "pubStartDate": start_date,
         "resultsPerPage": 15
     }
+
     try:
         res = requests.get(url, params=params, timeout=15)
         if res.status_code != 200:
