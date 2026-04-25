@@ -32,7 +32,7 @@ Built using **LangGraph + Groq LLM**, this project evolved from a simple automat
 
 The system follows a layered, agent-driven design:
 
-<img width="1842" height="281" alt="Untitled Diagram drawio (1)" src="https://github.com/user-attachments/assets/9443d100-ee6c-4fcc-9c78-24dbe37955a2" />
+<img width="1041" height="262" alt="Untitled Diagram drawio" src="https://github.com/user-attachments/assets/4792f9e4-d022-41dd-a1d9-046137251aef" />
 
 
 ### Components:
@@ -66,6 +66,11 @@ The agent generates structured PDF reports with:
 ### Demo: 
 
 https://github.com/user-attachments/assets/d7c43da8-bde6-42a0-b356-ff22126368e1
+
+
+https://github.com/user-attachments/assets/0dd5f84c-462f-4d3f-9e89-2e665f305e13
+
+
 
 
 
