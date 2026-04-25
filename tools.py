@@ -1,58 +1,44 @@
-from langchain_core.tools import tool
-import json
-from news import get_news
+from __future__ import annotations
+
+from typing import Any, Dict, List
+
 from blogs import fetch_security_blogs
+from correlation import build_threat_dataset
 from cve import fetch_cve_data
-from correlation import correlate_data
+from memory import load_memory, update_memory
+from news import get_news
+from report import create_pdf, render_markdown_report
 from scoring import score_threats
-from memory import update_memory
-from report import create_pdf
 
-@tool
-def fetch_news(days: int = 1) -> str:
-    """Fetch latest cybersecurity news articles."""
-    data = get_news(days)
-    return json.dumps(data, ensure_ascii=False)
 
-@tool
-def fetch_blogs() -> str:
-    """Fetch latest posts from top security blogs."""
-    data = fetch_security_blogs()
-    return json.dumps(data, ensure_ascii=False)
+def fetch_news(days: int = 2) -> List[Dict[str, Any]]:
+    return get_news(days=days)
 
-@tool
-def fetch_cves(days: int = 2) -> str:
-    """Fetch recent CVEs from NVD database."""
-    data = fetch_cve_data(days)
-    return json.dumps(data, ensure_ascii=False)
 
-@tool
-def correlate_threats(news_json: str, cves_json: str) -> str:
-    """Correlate news with CVEs."""
-    import json
-    news = json.loads(news_json)
-    cves = json.loads(cves_json)
-    result = correlate_data(news, cves)
-    return json.dumps(result, ensure_ascii=False)
+def fetch_blogs(limit_per_feed: int = 5) -> List[Dict[str, Any]]:
+    return fetch_security_blogs(limit_per_feed=limit_per_feed)
 
-@tool
-def score_threats_tool(data_json: str) -> str:
-    """Score and prioritize threats."""
-    import json
-    data = json.loads(data_json)
-    scored = score_threats(data)
-    return json.dumps(scored, ensure_ascii=False)
 
-@tool
-def store_in_memory(data_json: str) -> str:
-    """Store threats in persistent memory."""
-    import json
-    data = json.loads(data_json)
-    result = update_memory(data)
-    return json.dumps(result)
+def fetch_cves(days: int = 7) -> List[Dict[str, Any]]:
+    return fetch_cve_data(days=days)
 
-@tool
-def generate_pdf_report(content: str) -> str:
-    """Generate professional PDF report."""
-    filename = create_pdf(content)
-    return f"PDF Report generated successfully: {filename}"
+
+def analyze_threats(days: int = 2, cve_days: int = 7) -> List[Dict[str, Any]]:
+    memory = load_memory()
+    memory_titles = {(item.get("title") or "").strip().lower() for item in memory}
+    memory_ids = {(item.get("id") or "").strip().lower() for item in memory}
+
+    news_items = fetch_news(days=days)
+    blog_items = fetch_blogs()
+    cve_items = fetch_cves(days=cve_days)
+    dataset = build_threat_dataset(news_items, blog_items, cve_items)
+    return score_threats(dataset, known_titles=memory_titles, known_ids=memory_ids)
+
+
+def persist_threats(items: List[Dict[str, Any]]) -> Dict[str, Any]:
+    return update_memory(items)
+
+
+def generate_pdf_report(goal: str, report_type: str, items: List[Dict[str, Any]]) -> str:
+    content = render_markdown_report(goal, report_type, items, decisions=[], errors=[])
+    return create_pdf(content, report_type=report_type)

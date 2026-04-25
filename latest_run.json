@@ -1,0 +1,1543 @@
+{
+  "generated_at": "2026-04-24T15:14:46.388975+00:00",
+  "goal": "Continuously identify, prioritize, and summarize the most actionable cyber threats.",
+  "report_type": "priority",
+  "top_threats": [
+    {
+      "id": "CVE-2026-6284",
+      "title": "CVE-2026-6284",
+      "description": "An attacker with network access to the PLC is able to brute force discover passwords to gain unauthorized access to systems and services. The limited password complexity and no password input limiters makes brute force password enumeration possible.",
+      "content": "An attacker with network access to the PLC is able to brute force discover passwords to gain unauthorized access to systems and services. The limited password complexity and no password input limiters makes brute force password enumeration possible.",
+      "source_type": "cve",
+      "source_name": "NVD",
+      "published_at": "2026-04-17T16:17:07.620",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-6284",
+      "severity": "CRITICAL",
+      "cvss_score": 9.1,
+      "related_cves": [],
+      "cwes": [
+        "CWE-521"
+      ],
+      "references": [
+        "https://github.com/cisagov/CSAF/blob/develop/csaf_files/OT/white/2026/icsa-26-106-02.json",
+        "https://hornerautomation.com/cscape-software-free/cscape-software/",
+        "https://www.cisa.gov/news-events/ics-advisories/icsa-26-106-02"
+      ],
+      "tags": [],
+      "threat_score": 72,
+      "priority": "high",
+      "score_reasons": [
+        "keyword:rce",
+        "severity:CRITICAL",
+        "cvss:9.1",
+        "source:NVD"
+      ],
+      "is_new": false
+    },
+    {
+      "id": "CVE-2026-27890",
+      "title": "CVE-2026-27890",
+      "description": "Firebird is an open-source relational database management system. In versions prior to 5.0.4, 4.0.7 and 3.0.14, when processing CNCT_specific_data segments during authentication, the server assumes segments arrive in strictly ascending order. If segments arrive out of order, the Array class's grow() method computes a negative size value, causing a SIGSEGV crash. An unauthenticated attacker who knows only the server's IP and port can exploit this to crash the server. This issue has been fixed in versions 5.0.4, 4.0.7 and 3.0.14.",
+      "content": "Firebird is an open-source relational database management system. In versions prior to 5.0.4, 4.0.7 and 3.0.14, when processing CNCT_specific_data segments during authentication, the server assumes segments arrive in strictly ascending order. If segments arrive out of order, the Array class's grow() method computes a negative size value, causing a SIGSEGV crash. An unauthenticated attacker who knows only the server's IP and port can exploit this to crash the server. This issue has been fixed in versions 5.0.4, 4.0.7 and 3.0.14.",
+      "source_type": "cve",
+      "source_name": "NVD",
+      "published_at": "2026-04-17T19:16:34.993",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-27890",
+      "severity": "HIGH",
+      "cvss_score": 8.2,
+      "related_cves": [],
+      "cwes": [
+        "CWE-119",
+        "CWE-787"
+      ],
+      "references": [
+        "https://github.com/FirebirdSQL/firebird/releases/tag/v3.0.14",
+        "https://github.com/FirebirdSQL/firebird/releases/tag/v4.0.7",
+        "https://github.com/FirebirdSQL/firebird/releases/tag/v5.0.4",
+        "https://github.com/FirebirdSQL/firebird/security/advisories/GHSA-6crx-4g37-7j49"
+      ],
+      "tags": [],
+      "threat_score": 72,
+      "priority": "high",
+      "score_reasons": [
+        "keyword:rce",
+        "keyword:exploit",
+        "severity:HIGH",
+        "cvss:8.2",
+        "source:NVD"
+      ],
+      "is_new": false
+    },
+    {
+      "id": "CVE-2026-28224",
+      "title": "CVE-2026-28224",
+      "description": "Firebird is an open-source relational database management system. In versions prior to 5.0.4, 4.0.7 and 3.0.14, when the server receives an op_crypt_key_callback packet without prior authentication, the port_server_crypt_callback handler is not initialized, resulting in a null pointer dereference and server crash. An unauthenticated attacker who knows only the server's IP and port can exploit this to crash the server. This issue has been fixed in versions 5.0.4, 4.0.7 and 3.0.14.",
+      "content": "Firebird is an open-source relational database management system. In versions prior to 5.0.4, 4.0.7 and 3.0.14, when the server receives an op_crypt_key_callback packet without prior authentication, the port_server_crypt_callback handler is not initialized, resulting in a null pointer dereference and server crash. An unauthenticated attacker who knows only the server's IP and port can exploit this to crash the server. This issue has been fixed in versions 5.0.4, 4.0.7 and 3.0.14.",
+      "source_type": "cve",
+      "source_name": "NVD",
+      "published_at": "2026-04-17T19:16:35.983",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-28224",
+      "severity": "HIGH",
+      "cvss_score": 8.2,
+      "related_cves": [],
+      "cwes": [
+        "CWE-476"
+      ],
+      "references": [
+        "https://github.com/FirebirdSQL/firebird/releases/tag/v3.0.14",
+        "https://github.com/FirebirdSQL/firebird/releases/tag/v4.0.7",
+        "https://github.com/FirebirdSQL/firebird/releases/tag/v5.0.4",
+        "https://github.com/FirebirdSQL/firebird/security/advisories/GHSA-xrcw-wpjx-pr95",
+        "https://github.com/FirebirdSQL/firebird/security/advisories/GHSA-xrcw-wpjx-pr95"
+      ],
+      "tags": [],
+      "threat_score": 72,
+      "priority": "high",
+      "score_reasons": [
+        "keyword:rce",
+        "keyword:exploit",
+        "severity:HIGH",
+        "cvss:8.2",
+        "source:NVD"
+      ],
+      "is_new": false
+    },
+    {
+      "id": "CVE-2026-33337",
+      "title": "CVE-2026-33337",
+      "description": "Firebird is an open-source relational database management system. In versions prior to 5.0.4, 4.0.7 and 3.0.14, when deserializing a slice packet, the xdr_datum() function does not validate that a cstring length conforms to the slice descriptor bounds, allowing a cstring longer than the allocated buffer to overflow it. An unauthenticated attacker can exploit this by sending a crafted packet to the server, potentially causing a crash or other security impact. This issue has been fixed in versions 5.0.4, 4.0.7 and 3.0.14.",
+      "content": "Firebird is an open-source relational database management system. In versions prior to 5.0.4, 4.0.7 and 3.0.14, when deserializing a slice packet, the xdr_datum() function does not validate that a cstring length conforms to the slice descriptor bounds, allowing a cstring longer than the allocated buffer to overflow it. An unauthenticated attacker can exploit this by sending a crafted packet to the server, potentially causing a crash or other security impact. This issue has been fixed in versions 5.0.4, 4.0.7 and 3.0.14.",
+      "source_type": "cve",
+      "source_name": "NVD",
+      "published_at": "2026-04-17T19:16:36.223",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-33337",
+      "severity": "HIGH",
+      "cvss_score": 7.5,
+      "related_cves": [],
+      "cwes": [
+        "CWE-120",
+        "CWE-502"
+      ],
+      "references": [
+        "https://github.com/FirebirdSQL/firebird/releases/tag/v3.0.14",
+        "https://github.com/FirebirdSQL/firebird/releases/tag/v4.0.7",
+        "https://github.com/FirebirdSQL/firebird/releases/tag/v5.0.4",
+        "https://github.com/FirebirdSQL/firebird/security/advisories/GHSA-89mq-229g-x47p"
+      ],
+      "tags": [],
+      "threat_score": 71,
+      "priority": "high",
+      "score_reasons": [
+        "keyword:rce",
+        "keyword:exploit",
+        "severity:HIGH",
+        "cvss:7.5",
+        "source:NVD"
+      ],
+      "is_new": false
+    },
+    {
+      "id": "CVE-2026-37749",
+      "title": "CVE-2026-37749",
+      "description": "A SQL injection vulnerability in CodeAstro Simple Attendance Management System v1.0 allows remote unauthenticated attackers to bypass authentication via the username parameter in index.php.",
+      "content": "A SQL injection vulnerability in CodeAstro Simple Attendance Management System v1.0 allows remote unauthenticated attackers to bypass authentication via the username parameter in index.php.",
+      "source_type": "cve",
+      "source_name": "NVD",
+      "published_at": "2026-04-17T15:16:51.763",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-37749",
+      "severity": "CRITICAL",
+      "cvss_score": 9.8,
+      "related_cves": [],
+      "cwes": [
+        "CWE-89"
+      ],
+      "references": [
+        "https://codeastro.com/simple-attendance-management-system-in-php-with-source-code/",
+        "https://github.com/menevarad007/CVE-2026-37749"
+      ],
+      "tags": [],
+      "threat_score": 67,
+      "priority": "high",
+      "score_reasons": [
+        "keyword:vulnerability",
+        "severity:CRITICAL",
+        "cvss:9.8",
+        "source:NVD"
+      ],
+      "is_new": false
+    },
+    {
+      "id": "CVE-2026-5710",
+      "title": "CVE-2026-5710",
+      "description": "The Drag and Drop Multiple File Upload for Contact Form 7 plugin for WordPress is vulnerable to Path Traversal leading to Arbitrary File Read in versions up to and including 1.3.9.6. This is due to the plugin using client-supplied mfile[] POST values as the source of truth for email attachment selection without performing any server-side upload provenance check, path canonicalization, or directory containment boundary enforcement. In dnd_wpcf7_posted_data(), each user-submitted filename is directly appended to the plugin's upload URL without sanitization. In dnd_cf7_mail_components(), the URL is converted back to a filesystem path using str_replace() and only file_exists() is used as the acceptance check before attaching the file to the outgoing CF7 email. This makes it possible for unauthenticated attackers to read and exfiltrate arbitrary files readable by the web server process via path traversal sequences in the mfile[] parameter, with files being disclosed as email attachments. Note: This vulnerability is limited to the 'wp-content' folder due to the wpcf7_is_file_path_in_content_dir() function in the Contact Form 7 plugin.",
+      "content": "The Drag and Drop Multiple File Upload for Contact Form 7 plugin for WordPress is vulnerable to Path Traversal leading to Arbitrary File Read in versions up to and including 1.3.9.6. This is due to the plugin using client-supplied mfile[] POST values as the source of truth for email attachment selection without performing any server-side upload provenance check, path canonicalization, or directory containment boundary enforcement. In dnd_wpcf7_posted_data(), each user-submitted filename is directly appended to the plugin's upload URL without sanitization. In dnd_cf7_mail_components(), the URL is converted back to a filesystem path using str_replace() and only file_exists() is used as the acceptance check before attaching the file to the outgoing CF7 email. This makes it possible for unauthenticated attackers to read and exfiltrate arbitrary files readable by the web server process via path traversal sequences in the mfile[] parameter, with files being disclosed as email attachments. Note: This vulnerability is limited to the 'wp-content' folder due to the wpcf7_is_file_path_in_content_dir() function in the Contact Form 7 plugin.",
+      "source_type": "cve",
+      "source_name": "NVD",
+      "published_at": "2026-04-17T18:16:32.593",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-5710",
+      "severity": "HIGH",
+      "cvss_score": 7.5,
+      "related_cves": [],
+      "cwes": [
+        "CWE-22"
+      ],
+      "references": [
+        "https://plugins.trac.wordpress.org/browser/drag-and-drop-multiple-file-upload-contact-form-7/tags/1.3.9.6/inc/dnd-upload-cf7.php#L203",
+        "https://plugins.trac.wordpress.org/browser/drag-and-drop-multiple-file-upload-contact-form-7/tags/1.3.9.6/inc/dnd-upload-cf7.php#L477",
+        "https://plugins.trac.wordpress.org/browser/drag-and-drop-multiple-file-upload-contact-form-7/tags/1.3.9.6/inc/dnd-upload-cf7.php#L718",
+        "https://plugins.trac.wordpress.org/changeset/3508522/drag-and-drop-multiple-file-upload-contact-form-7",
+        "https://www.wordfence.com/threat-intel/vulnerabilities/id/1005eb8c-da5a-4422-9d65-0f341ad755b2?source=cve"
+      ],
+      "tags": [],
+      "threat_score": 67,
+      "priority": "high",
+      "score_reasons": [
+        "keyword:rce",
+        "keyword:vulnerability",
+        "severity:HIGH",
+        "cvss:7.5",
+        "source:NVD"
+      ],
+      "is_new": false
+    },
+    {
+      "id": "CVE-2026-40525",
+      "title": "CVE-2026-40525",
+      "description": "OpenViking prior to version 0.3.9 contains an authentication bypass vulnerability in the VikingBot OpenAPI HTTP route surface where the authentication check fails open when the api_key configuration value is unset or empty. Remote attackers with network access to the exposed service can invoke privileged bot-control functionality without providing a valid X-API-Key header, including submitting attacker-controlled prompts, creating or using bot sessions, and accessing downstream tools, integrations, secrets, or data accessible to the bot.",
+      "content": "OpenViking prior to version 0.3.9 contains an authentication bypass vulnerability in the VikingBot OpenAPI HTTP route surface where the authentication check fails open when the api_key configuration value is unset or empty. Remote attackers with network access to the exposed service can invoke privileged bot-control functionality without providing a valid X-API-Key header, including submitting attacker-controlled prompts, creating or using bot sessions, and accessing downstream tools, integrations, secrets, or data accessible to the bot.",
+      "source_type": "cve",
+      "source_name": "NVD",
+      "published_at": "2026-04-17T19:16:39.017",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-40525",
+      "severity": "CRITICAL",
+      "cvss_score": 9.1,
+      "related_cves": [],
+      "cwes": [
+        "CWE-636"
+      ],
+      "references": [
+        "https://github.com/volcengine/OpenViking/commit/c7bb1676f4d037609f041bf39e4e2bd52e8f9820",
+        "https://github.com/volcengine/OpenViking/pull/1447",
+        "https://github.com/volcengine/OpenViking/releases/tag/v0.3.9",
+        "https://www.vulncheck.com/advisories/openviking-authentication-bypass-via-vikingbot-openapi"
+      ],
+      "tags": [],
+      "threat_score": 66,
+      "priority": "high",
+      "score_reasons": [
+        "keyword:vulnerability",
+        "severity:CRITICAL",
+        "cvss:9.1",
+        "source:NVD"
+      ],
+      "is_new": false
+    },
+    {
+      "id": "CVE-2026-40515",
+      "title": "CVE-2026-40515",
+      "description": "OpenHarness before commit bd4df81 contains a permission bypass vulnerability that allows attackers to read sensitive files by exploiting incomplete path normalization in the permission checker. Attackers can invoke the built-in grep and glob tools with sensitive root directories that are not properly evaluated against configured path rules, allowing disclosure of sensitive local file content, key material, configuration files, or directory contents despite configured path restrictions.",
+      "content": "OpenHarness before commit bd4df81 contains a permission bypass vulnerability that allows attackers to read sensitive files by exploiting incomplete path normalization in the permission checker. Attackers can invoke the built-in grep and glob tools with sensitive root directories that are not properly evaluated against configured path rules, allowing disclosure of sensitive local file content, key material, configuration files, or directory contents despite configured path restrictions.",
+      "source_type": "cve",
+      "source_name": "NVD",
+      "published_at": "2026-04-17T17:17:09.067",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-40515",
+      "severity": "HIGH",
+      "cvss_score": 7.5,
+      "related_cves": [],
+      "cwes": [
+        "CWE-863"
+      ],
+      "references": [
+        "https://github.com/HKUDS/OpenHarness/commit/bd4df81f634f8c7cddcc3fdf7f561a13dcbf03ae",
+        "https://github.com/HKUDS/OpenHarness/pull/92",
+        "https://www.vulncheck.com/advisories/openharness-permission-bypass-via-grep-and-glob-root-argument"
+      ],
+      "tags": [],
+      "threat_score": 65,
+      "priority": "high",
+      "score_reasons": [
+        "keyword:vulnerability",
+        "keyword:exploit",
+        "severity:HIGH",
+        "cvss:7.5",
+        "source:NVD"
+      ],
+      "is_new": false
+    },
+    {
+      "id": "CVE-2026-3464",
+      "title": "CVE-2026-3464",
+      "description": "The WP Customer Area plugin for WordPress is vulnerable to arbitrary file read and deletion due to insufficient file path validation in the 'ajax_attach_file' function in all versions up to, and including, 8.3.4. This makes it possible for authenticated attackers with a role that an administrator grants access to (e.g., Subscriber) to to read the contents of arbitrary files on the server, which can contain sensitive information, or delete arbitrary files on the server, which can easily lead to remote code execution when the right file is deleted (such as wp-config.php).",
+      "content": "The WP Customer Area plugin for WordPress is vulnerable to arbitrary file read and deletion due to insufficient file path validation in the 'ajax_attach_file' function in all versions up to, and including, 8.3.4. This makes it possible for authenticated attackers with a role that an administrator grants access to (e.g., Subscriber) to to read the contents of arbitrary files on the server, which can contain sensitive information, or delete arbitrary files on the server, which can easily lead to remote code execution when the right file is deleted (such as wp-config.php).",
+      "source_type": "cve",
+      "source_name": "NVD",
+      "published_at": "2026-04-17T17:17:07.217",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-3464",
+      "severity": "HIGH",
+      "cvss_score": 8.8,
+      "related_cves": [],
+      "cwes": [
+        "CWE-22"
+      ],
+      "references": [
+        "https://plugins.trac.wordpress.org/browser/customer-area/tags/8.3.4/src/js/common/files/file-attachment-manager.js#L170",
+        "https://plugins.trac.wordpress.org/browser/customer-area/tags/8.3.4/src/js/common/files/ftp-uploader.js#L63",
+        "https://plugins.trac.wordpress.org/browser/customer-area/tags/8.3.4/src/php/core-addons/private-file/private-file-addon.class.php#L844",
+        "https://plugins.trac.wordpress.org/browser/customer-area/tags/8.3.4/src/php/core-addons/private-file/private-file-addon.class.php#L883",
+        "https://plugins.trac.wordpress.org/browser/customer-area/tags/8.3.4/src/php/core-addons/private-file/private-file-addon.class.php#L920",
+        "https://plugins.trac.wordpress.org/browser/customer-area/tags/8.3.4/src/php/core-addons/private-file/private-file-default-handlers.class.php#L404",
+        "https://plugins.trac.wordpress.org/browser/customer-area/tags/8.3.4/src/php/core-addons/private-file/private-file-default-handlers.class.php#L422",
+        "https://plugins.trac.wordpress.org/browser/customer-area/tags/8.3.4/src/php/core-addons/private-file/private-file-default-handlers.class.php#L428",
+        "https://plugins.trac.wordpress.org/browser/customer-area/tags/8.3.4/src/php/core-addons/private-file/templates/private-attachments-add-ftp-folder-frontend.template.php#L17",
+        "https://plugins.trac.wordpress.org/changeset/3507868/customer-area",
+        "https://www.wordfence.com/threat-intel/vulnerabilities/id/aadf1f4c-c852-4167-9b09-7e679a953725?source=cve"
+      ],
+      "tags": [],
+      "threat_score": 63,
+      "priority": "high",
+      "score_reasons": [
+        "keyword:remote code execution",
+        "severity:HIGH",
+        "cvss:8.8",
+        "source:NVD"
+      ],
+      "is_new": false
+    },
+    {
+      "id": "CVE-2026-5718",
+      "title": "CVE-2026-5718",
+      "description": "The Drag and Drop Multiple File Upload for Contact Form 7 plugin for WordPress is vulnerable to arbitrary file upload in versions up to, and including, 1.3.9.6. This is due to insufficient file type validation that occurs when custom blacklist types are configured, which replaces the default dangerous extension denylist instead of merging with it, and the wpcf7_antiscript_file_name() sanitization function being bypassed for filenames containing non-ASCII characters. This makes it possible for unauthenticated attackers to upload arbitrary files, such as PHP files, to the server, which can be leveraged to achieve remote code execution.",
+      "content": "The Drag and Drop Multiple File Upload for Contact Form 7 plugin for WordPress is vulnerable to arbitrary file upload in versions up to, and including, 1.3.9.6. This is due to insufficient file type validation that occurs when custom blacklist types are configured, which replaces the default dangerous extension denylist instead of merging with it, and the wpcf7_antiscript_file_name() sanitization function being bypassed for filenames containing non-ASCII characters. This makes it possible for unauthenticated attackers to upload arbitrary files, such as PHP files, to the server, which can be leveraged to achieve remote code execution.",
+      "source_type": "cve",
+      "source_name": "NVD",
+      "published_at": "2026-04-17T18:16:32.753",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-5718",
+      "severity": "HIGH",
+      "cvss_score": 8.1,
+      "related_cves": [],
+      "cwes": [
+        "CWE-434"
+      ],
+      "references": [
+        "https://plugins.trac.wordpress.org/browser/drag-and-drop-multiple-file-upload-contact-form-7/tags/1.3.9.6/inc/dnd-upload-cf7.php#L62",
+        "https://plugins.trac.wordpress.org/browser/drag-and-drop-multiple-file-upload-contact-form-7/tags/1.3.9.6/inc/dnd-upload-cf7.php#L883",
+        "https://plugins.trac.wordpress.org/browser/drag-and-drop-multiple-file-upload-contact-form-7/tags/1.3.9.6/inc/dnd-upload-cf7.php#L970",
+        "https://plugins.trac.wordpress.org/browser/drag-and-drop-multiple-file-upload-contact-form-7/tags/1.3.9.6/inc/dnd-upload-cf7.php#L987",
+        "https://plugins.trac.wordpress.org/changeset/3508522/drag-and-drop-multiple-file-upload-contact-form-7",
+        "https://www.wordfence.com/threat-intel/vulnerabilities/id/38f95d40-a6d4-429c-9872-9d2531e942eb?source=cve"
+      ],
+      "tags": [],
+      "threat_score": 62,
+      "priority": "high",
+      "score_reasons": [
+        "keyword:remote code execution",
+        "severity:HIGH",
+        "cvss:8.1",
+        "source:NVD"
+      ],
+      "is_new": false
+    }
+  ],
+  "decision_log": [
+    {
+      "timestamp": "2026-04-24T15:14:40.480172+00:00",
+      "step": "start",
+      "detail": "autonomous CTI run started"
+    },
+    {
+      "timestamp": "2026-04-24T15:14:41.671994+00:00",
+      "step": "collect",
+      "detail": "news collected: 19 items"
+    },
+    {
+      "timestamp": "2026-04-24T15:14:42.773540+00:00",
+      "step": "collect",
+      "detail": "cves collected: 25 items"
+    },
+    {
+      "timestamp": "2026-04-24T15:14:44.096582+00:00",
+      "step": "analyze",
+      "detail": "dataset built: 44 unique records"
+    },
+    {
+      "timestamp": "2026-04-24T15:14:44.297313+00:00",
+      "step": "score",
+      "detail": "threats scored: 44"
+    },
+    {
+      "timestamp": "2026-04-24T15:14:44.474089+00:00",
+      "step": "decide",
+      "detail": "report type selected: priority"
+    },
+    {
+      "timestamp": "2026-04-24T15:14:46.032921+00:00",
+      "step": "memory",
+      "detail": "stored 17 new records"
+    },
+    {
+      "timestamp": "2026-04-24T15:14:46.125862+00:00",
+      "step": "report",
+      "detail": "pdf generated: C:\\Users\\vigne\\AI Agent version2_autonomous\\Cyber_Threat_Report_20260424_204446.pdf"
+    },
+    {
+      "timestamp": "2026-04-24T15:14:46.248290+00:00",
+      "step": "finish",
+      "detail": "autonomous CTI run completed"
+    }
+  ],
+  "decision_breakdown": [
+    {
+      "step": "analyze",
+      "count": 1
+    },
+    {
+      "step": "collect",
+      "count": 2
+    },
+    {
+      "step": "decide",
+      "count": 1
+    },
+    {
+      "step": "finish",
+      "count": 1
+    },
+    {
+      "step": "memory",
+      "count": 1
+    },
+    {
+      "step": "report",
+      "count": 1
+    },
+    {
+      "step": "score",
+      "count": 1
+    },
+    {
+      "step": "start",
+      "count": 1
+    }
+  ],
+  "errors": [
+    "Blog collection failed - HTTP 403 (Cloudflare protection)",
+    "LLM summarization failed - HTTP 403 (Cloudflare protection)"
+  ],
+  "operational_alerts": [
+    {
+      "timestamp": "2026-04-24T15:14:43.842334+00:00",
+      "step": "collect_blogs",
+      "label": "Blog collection",
+      "severity": "high",
+      "summary": "Blog collection failed - HTTP 403 (Cloudflare protection)",
+      "detail": "Remote source returned a Cloudflare anti-bot challenge instead of the expected feed.",
+      "technical_details": "Cloudflare challenge page returned by remote source. Raw HTML omitted."
+    },
+    {
+      "timestamp": "2026-04-24T15:14:45.565475+00:00",
+      "step": "summarize",
+      "label": "LLM summarization",
+      "severity": "high",
+      "summary": "LLM summarization failed - HTTP 403 (Cloudflare protection)",
+      "detail": "Remote source returned a Cloudflare anti-bot challenge instead of the expected feed.",
+      "technical_details": "HTTP 403: {\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-1xxx-errors/error-1010/\",\"title\":\"Error 1010: Access denied\",\"status\":403,\"detail\":\"The site owner has blocked access based on your browser's signature.\",\"instance\":\"9f160f487de8ad8b\",\"error_code\":1010,\"error_name\":\"browser_signature_banned\",\"error_category\":\"access_denied\",\"ray_id\":\"9f160f487de8ad8b\",\"timestamp\":\"2026-04-24T15:14:47Z\",\"zone\":\"api.groq.com\",\"cloudflare_error\":true,\"retryable\":false,\"owner_action_required\":true,\"what_you_should_do\":\"**Do not retry.** Your user-agent has been banned by the site owner.\",\"footer\":\"This error was generated by Cloudflare on behalf of the website owner.\"}"
+    }
+  ],
+  "memory": {
+    "stored": 17,
+    "total": 293,
+    "path": "C:\\Users\\vigne\\AI Agent version2_autonomous\\threat_memory.json"
+  },
+  "report": "C:\\Users\\vigne\\AI Agent version2_autonomous\\Cyber_Threat_Report_20260424_204446.pdf",
+  "report_filename": "Cyber_Threat_Report_20260424_204446.pdf",
+  "report_markdown": "# Cyber Threat Intelligence Report\n\nGenerated: 2026-04-24 20:44:45\nReport Type: PRIORITY\nMission Goal: Continuously identify, prioritize, and summarize the most actionable cyber threats.\n\n## Executive Summary\nThe agent identified 10 prioritized threats, including 0 critical and 10 high-priority items.\nThe highest-risk item is CVE-2026-6284 with a score of 72/100.\nPriority was based on severity, exploitation indicators, recency, source quality, and novelty.\n\n## Top Prioritized Threats\n### 1. CVE-2026-6284 (Priority: HIGH, Score: 72/100)\n- Source: NVD (cve)\n- Published: 2026-04-17T16:17:07.620\n- Severity: CRITICAL\n- CVSS Score: 9.1\n- Summary: An attacker with network access to the PLC is able to brute force discover passwords to gain unauthorized access to systems and services. The limited password complexity and no password input limiters makes brute force password enumeration possible.\n- Link: https://nvd.nist.gov/vuln/detail/CVE-2026-6284\n- Why Prioritized: keyword:rce, severity:CRITICAL, cvss:9.1, source:NVD\n\n### 2. CVE-2026-27890 (Priority: HIGH, Score: 72/100)\n- Source: NVD (cve)\n- Published: 2026-04-17T19:16:34.993\n- Severity: HIGH\n- CVSS Score: 8.2\n- Summary: Firebird is an open-source relational database management system. In versions prior to 5.0.4, 4.0.7 and 3.0.14, when processing CNCT_specific_data segments during authentication, the server assumes segments arrive in strictly ascending order. If segments arrive out of order, the Array class's grow() method computes a negative size value, causing a SIGSEGV crash. An unauthenticated attacker who knows only the server's IP and port can exploit this to crash the server. This issue has been fixed in versions 5.0.4, 4.0.7 and 3.0.14.\n- Link: https://nvd.nist.gov/vuln/detail/CVE-2026-27890\n- Why Prioritized: keyword:rce, keyword:exploit, severity:HIGH, cvss:8.2, source:NVD\n\n### 3. CVE-2026-28224 (Priority: HIGH, Score: 72/100)\n- Source: NVD (cve)\n- Published: 2026-04-17T19:16:35.983\n- Severity: HIGH\n- CVSS Score: 8.2\n- Summary: Firebird is an open-source relational database management system. In versions prior to 5.0.4, 4.0.7 and 3.0.14, when the server receives an op_crypt_key_callback packet without prior authentication, the port_server_crypt_callback handler is not initialized, resulting in a null pointer dereference and server crash. An unauthenticated attacker who knows only the server's IP and port can exploit this to crash the server. This issue has been fixed in versions 5.0.4, 4.0.7 and 3.0.14.\n- Link: https://nvd.nist.gov/vuln/detail/CVE-2026-28224\n- Why Prioritized: keyword:rce, keyword:exploit, severity:HIGH, cvss:8.2, source:NVD\n\n### 4. CVE-2026-33337 (Priority: HIGH, Score: 71/100)\n- Source: NVD (cve)\n- Published: 2026-04-17T19:16:36.223\n- Severity: HIGH\n- CVSS Score: 7.5\n- Summary: Firebird is an open-source relational database management system. In versions prior to 5.0.4, 4.0.7 and 3.0.14, when deserializing a slice packet, the xdr_datum() function does not validate that a cstring length conforms to the slice descriptor bounds, allowing a cstring longer than the allocated buffer to overflow it. An unauthenticated attacker can exploit this by sending a crafted packet to the server, potentially causing a crash or other security impact. This issue has been fixed in versions 5.0.4, 4.0.7 and 3.0.14.\n- Link: https://nvd.nist.gov/vuln/detail/CVE-2026-33337\n- Why Prioritized: keyword:rce, keyword:exploit, severity:HIGH, cvss:7.5, source:NVD\n\n### 5. CVE-2026-37749 (Priority: HIGH, Score: 67/100)\n- Source: NVD (cve)\n- Published: 2026-04-17T15:16:51.763\n- Severity: CRITICAL\n- CVSS Score: 9.8\n- Summary: A SQL injection vulnerability in CodeAstro Simple Attendance Management System v1.0 allows remote unauthenticated attackers to bypass authentication via the username parameter in index.php.\n- Link: https://nvd.nist.gov/vuln/detail/CVE-2026-37749\n- Why Prioritized: keyword:vulnerability, severity:CRITICAL, cvss:9.8, source:NVD\n\n### 6. CVE-2026-5710 (Priority: HIGH, Score: 67/100)\n- Source: NVD (cve)\n- Published: 2026-04-17T18:16:32.593\n- Severity: HIGH\n- CVSS Score: 7.5\n- Summary: The Drag and Drop Multiple File Upload for Contact Form 7 plugin for WordPress is vulnerable to Path Traversal leading to Arbitrary File Read in versions up to and including 1.3.9.6. This is due to the plugin using client-supplied mfile[] POST values as the source of truth for email attachment selection without performing any server-side upload provenance check, path canonicalization, or directory containment boundary enforcement. In dnd_wpcf7_posted_data(), each user-submitted filename is directly appended to the plugin's upload URL without sanitization. In dnd_cf7_mail_components(), the URL is converted back to a filesystem path using str_replace() and only file_exists() is used as the acceptance check before attaching the file to the outgoing CF7 email. This makes it possible for unauthenticated attackers to read and exfiltrate arbitrary files readable by the web server process via path traversal sequences in the mfile[] parameter, with files being disclosed as email attachments. Note: This vulnerability is limited to the 'wp-content' folder due to the wpcf7_is_file_path_in_content_dir() function in the Contact Form 7 plugin.\n- Link: https://nvd.nist.gov/vuln/detail/CVE-2026-5710\n- Why Prioritized: keyword:rce, keyword:vulnerability, severity:HIGH, cvss:7.5, source:NVD\n\n### 7. CVE-2026-40525 (Priority: HIGH, Score: 66/100)\n- Source: NVD (cve)\n- Published: 2026-04-17T19:16:39.017\n- Severity: CRITICAL\n- CVSS Score: 9.1\n- Summary: OpenViking prior to version 0.3.9 contains an authentication bypass vulnerability in the VikingBot OpenAPI HTTP route surface where the authentication check fails open when the api_key configuration value is unset or empty. Remote attackers with network access to the exposed service can invoke privileged bot-control functionality without providing a valid X-API-Key header, including submitting attacker-controlled prompts, creating or using bot sessions, and accessing downstream tools, integrations, secrets, or data accessible to the bot.\n- Link: https://nvd.nist.gov/vuln/detail/CVE-2026-40525\n- Why Prioritized: keyword:vulnerability, severity:CRITICAL, cvss:9.1, source:NVD\n\n### 8. CVE-2026-40515 (Priority: HIGH, Score: 65/100)\n- Source: NVD (cve)\n- Published: 2026-04-17T17:17:09.067\n- Severity: HIGH\n- CVSS Score: 7.5\n- Summary: OpenHarness before commit bd4df81 contains a permission bypass vulnerability that allows attackers to read sensitive files by exploiting incomplete path normalization in the permission checker. Attackers can invoke the built-in grep and glob tools with sensitive root directories that are not properly evaluated against configured path rules, allowing disclosure of sensitive local file content, key material, configuration files, or directory contents despite configured path restrictions.\n- Link: https://nvd.nist.gov/vuln/detail/CVE-2026-40515\n- Why Prioritized: keyword:vulnerability, keyword:exploit, severity:HIGH, cvss:7.5, source:NVD\n\n### 9. CVE-2026-3464 (Priority: HIGH, Score: 63/100)\n- Source: NVD (cve)\n- Published: 2026-04-17T17:17:07.217\n- Severity: HIGH\n- CVSS Score: 8.8\n- Summary: The WP Customer Area plugin for WordPress is vulnerable to arbitrary file read and deletion due to insufficient file path validation in the 'ajax_attach_file' function in all versions up to, and including, 8.3.4. This makes it possible for authenticated attackers with a role that an administrator grants access to (e.g., Subscriber) to to read the contents of arbitrary files on the server, which can contain sensitive information, or delete arbitrary files on the server, which can easily lead to remote code execution when the right file is deleted (such as wp-config.php).\n- Link: https://nvd.nist.gov/vuln/detail/CVE-2026-3464\n- Why Prioritized: keyword:remote code execution, severity:HIGH, cvss:8.8, source:NVD\n\n### 10. CVE-2026-5718 (Priority: HIGH, Score: 62/100)\n- Source: NVD (cve)\n- Published: 2026-04-17T18:16:32.753\n- Severity: HIGH\n- CVSS Score: 8.1\n- Summary: The Drag and Drop Multiple File Upload for Contact Form 7 plugin for WordPress is vulnerable to arbitrary file upload in versions up to, and including, 1.3.9.6. This is due to insufficient file type validation that occurs when custom blacklist types are configured, which replaces the default dangerous extension denylist instead of merging with it, and the wpcf7_antiscript_file_name() sanitization function being bypassed for filenames containing non-ASCII characters. This makes it possible for unauthenticated attackers to upload arbitrary files, such as PHP files, to the server, which can be leveraged to achieve remote code execution.\n- Link: https://nvd.nist.gov/vuln/detail/CVE-2026-5718\n- Why Prioritized: keyword:remote code execution, severity:HIGH, cvss:8.1, source:NVD\n\n## Agent Decisions\n- 2026-04-24T15:14:40.480172+00:00: start -> autonomous CTI run started\n- 2026-04-24T15:14:41.671994+00:00: collect -> news collected: 19 items\n- 2026-04-24T15:14:42.773540+00:00: collect -> cves collected: 25 items\n- 2026-04-24T15:14:44.096582+00:00: analyze -> dataset built: 44 unique records\n- 2026-04-24T15:14:44.297313+00:00: score -> threats scored: 44\n- 2026-04-24T15:14:44.474089+00:00: decide -> report type selected: priority\n\n## Operational Recommendations\n- Patch or mitigate any critical or high-severity CVEs first.\n- Review external-facing systems, identity infrastructure, and exposed services for matching indicators.\n- Tune detections for exploit attempts, suspicious authentication activity, and ransomware precursor behaviors.\n- Validate backups, privileged access controls, and incident-response escalation paths.\n\n## Errors\n- Blog collection failed - HTTP 403 (Cloudflare protection)\n- LLM summarization failed - HTTP 403 (Cloudflare protection)\n",
+  "executive_summary": "",
+  "operational_recommendations": [
+    "Patch or mitigate any critical or high-severity CVEs first.",
+    "Review external-facing systems, identity infrastructure, and exposed services for matching indicators.",
+    "Tune detections for exploit attempts, suspicious authentication activity, and ransomware precursor behaviors.",
+    "Validate backups, privileged access controls, and incident-response escalation paths."
+  ],
+  "collected_counts": {
+    "news": 19,
+    "blogs": 0,
+    "cves": 25
+  },
+  "collected_items": {
+    "news": [
+      {
+        "id": "https://slashdot.org/firehose.pl?op=view&amp;id=181928452",
+        "title": "UK spy agency releases malware-blocking gadget for HDMI and DisplayPort cables — SilentGlass blocks malicious traffic traveling between display and compu",
+        "description": "The NCSC, a part of the British GCHQ, has deployed this protective gadget throughout various government estates and is now making it publicly available through Goldilock Labs.\n                                                                                   …",
+        "content": "The Fine Print: The following comments are owned by whoever posted them. We are not responsible for them in any way.",
+        "source_type": "news",
+        "source_name": "Slashdot.org",
+        "published_at": "2026-04-23T15:13:40+00:00",
+        "url": "https://slashdot.org/firehose.pl?op=view&amp;id=181928452",
+        "severity": "",
+        "cvss_score": null,
+        "related_cves": [],
+        "tags": []
+      },
+      {
+        "id": "https://abcnews.com/Entertainment/wireStory/combined-paramount-warner-132315228",
+        "title": "What a combined Paramount-Warner would mean",
+        "description": "HBO Max, “Harry Potter,” “Top Gun,” CBS and CNN may all be placed the control of the upstart Paramount Skydance soon",
+        "content": "NEW YORK -- HBO Max, Harry Potter and CNN may soon find themselves under a new roof: Paramount.\r\nThat's because shareholders of Warner Bros. Discovery on Thursday voted to sell the entire business to… [+6913 chars]",
+        "source_type": "news",
+        "source_name": "Abcnews.com",
+        "published_at": "2026-04-23T15:13:07+00:00",
+        "url": "https://abcnews.com/Entertainment/wireStory/combined-paramount-warner-132315228",
+        "severity": "",
+        "cvss_score": null,
+        "related_cves": [],
+        "tags": []
+      },
+      {
+        "id": "https://blog.talosintelligence.com/uat-4356-firestarter/",
+        "title": "UAT-4356's Targeting of Cisco Firepower Devices",
+        "description": "Cisco Talos is aware of UAT-4356's continued active targeting of Cisco Firepower devices’ Firepower eXtensible Operating System (FXOS). UAT-4356 exploited n-day vulnerabilities (CVE-2025-20333 and CVE-2025-20362) to gain unauthorized access to vulnerable devi…",
+        "content": "Cisco Talos is aware of UAT-4356's continued active targeting of Cisco Firepower devices Firepower eXtensible Operating System (FXOS). UAT-4356 exploited n-day vulnerabilities (CVE-2025-20333 and CVE… [+5836 chars]",
+        "source_type": "news",
+        "source_name": "Talosintelligence.com",
+        "published_at": "2026-04-23T15:10:57+00:00",
+        "url": "https://blog.talosintelligence.com/uat-4356-firestarter/",
+        "severity": "",
+        "cvss_score": null,
+        "related_cves": [],
+        "tags": []
+      },
+      {
+        "id": "https://www.techradar.com/reviews/crashplan-review",
+        "title": "CrashPlan review",
+        "description": "Our CrashPlan review will look at whether you can rely on this data recovery and backup software to restore files after a crash or malware attack.",
+        "content": "Why you can trust TechRadar\r\nWe spend hours testing every product or service we review, so you can be sure you're buying the best. Find out more about how we test.If you’re a small business looking f… [+6874 chars]",
+        "source_type": "news",
+        "source_name": "TechRadar",
+        "published_at": "2026-04-23T15:10:23+00:00",
+        "url": "https://www.techradar.com/reviews/crashplan-review",
+        "severity": "",
+        "cvss_score": null,
+        "related_cves": [],
+        "tags": []
+      },
+      {
+        "id": "https://thenextweb.com/news/us-microreactor-companies-air-force-bases-nuclear/",
+        "title": "The Pentagon just picked the companies that will put nuclear reactors on Air Force bases",
+        "description": "Summary: The Pentagon has narrowed its Advanced Nuclear Power for Installations (ANPI) programme from eight companies to three, advancing microreactor deployment at Buckley Space Force Base (Colorado) and Malmstrom Air Force Base (Montana) by 2030. The origin…",
+        "content": "Summary: The Pentagon has narrowed its Advanced Nuclear Power for Installations (ANPI) programme from eight companies to three, advancing microreactor deployment at Buckley Space Force Base (Colorado… [+9102 chars]",
+        "source_type": "news",
+        "source_name": "The Next Web",
+        "published_at": "2026-04-23T15:09:21+00:00",
+        "url": "https://thenextweb.com/news/us-microreactor-companies-air-force-bases-nuclear/",
+        "severity": "",
+        "cvss_score": null,
+        "related_cves": [],
+        "tags": []
+      },
+      {
+        "id": "https://www.dailymail.com/health/article-15759259/morning-naps-daytime-increase-risk-death-deadly-illness.html",
+        "title": "Need morning naps? Experts say it could be a warning sign of a deadly illness",
+        "description": "Researchers in Massachusetts warn that daytime napping could be a warning sign for a deadly health condition.",
+        "content": "Taking morning naps could be a warning sign of a deadly health condition, a study has warned.\r\nAmong adults in their 80s, researchers found that those who napped before 1pm had a 30 percent higher ri… [+3353 chars]",
+        "source_type": "news",
+        "source_name": "Dailymail.com",
+        "published_at": "2026-04-23T15:04:39+00:00",
+        "url": "https://www.dailymail.com/health/article-15759259/morning-naps-daytime-increase-risk-death-deadly-illness.html",
+        "severity": "",
+        "cvss_score": null,
+        "related_cves": [],
+        "tags": []
+      },
+      {
+        "id": "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-asaftd-persist-CISAED25-03?vs_f=Cisco%20Security%20Advisory%26vs_cat=Security%20Intelligence%26vs_type=RSS%26vs_p=Continued%20Evolution%20of%20Persistence%20Mechanism%20Against%20Cisco%20Secure%20Firewall%20Adaptive%20Security%20Appliance%20and%20Secure%20Firewall%20Threat%20Defense%26vs_k=1",
+        "title": "Continued Evolution of Persistence Mechanism Against Cisco Secure Firewall Adaptive Security Appliance and Secure Firewall Threat Defense",
+        "description": "On April 23, 2026, the U.S. Cybersecurity and Infrastructure Security Agency (CISA) issued an update to V1: Emergency Directive (ED) 25-03: Identify and Mitigate Potential Compromise of Cisco Devices related to Cisco Secure Firewall Adaptive Security Applianc…",
+        "content": "At the time of publication, this is the only known Indication of Compromise (IoC) identified for this persistent implant.\r\nThe newly discovered persistent implant is known to start a malicious proces… [+1256 chars]",
+        "source_type": "news",
+        "source_name": "Cisco.com",
+        "published_at": "2026-04-23T15:00:00+00:00",
+        "url": "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-asaftd-persist-CISAED25-03?vs_f=Cisco%20Security%20Advisory%26vs_cat=Security%20Intelligence%26vs_type=RSS%26vs_p=Continued%20Evolution%20of%20Persistence%20Mechanism%20Against%20Cisco%20Secure%20Firewall%20Adaptive%20Security%20Appliance%20and%20Secure%20Firewall%20Threat%20Defense%26vs_k=1",
+        "severity": "",
+        "cvss_score": null,
+        "related_cves": [],
+        "tags": []
+      },
+      {
+        "id": "https://www.fortinet.com/blog/business-and-technology/the-fortinet-2025-sustainability-report",
+        "title": "The Fortinet 2025 Sustainability Report",
+        "description": "The Fortinet 2025 Sustainability Report outlines progress in securing the digital world, reducing environmental impact through energy-efficiency products and operations, expanding access to cybersecurity education, and strengthening responsible business pract…",
+        "content": "For over 25 years, Fortinet has helped secure the digital world. As cyberthreats evolve, so does our responsibility to protect people, organizations, and society. In 2025, we expanded AI-driven threa… [+3600 chars]",
+        "source_type": "news",
+        "source_name": "Fortinet.com",
+        "published_at": "2026-04-23T15:00:00+00:00",
+        "url": "https://www.fortinet.com/blog/business-and-technology/the-fortinet-2025-sustainability-report",
+        "severity": "",
+        "cvss_score": null,
+        "related_cves": [],
+        "tags": []
+      },
+      {
+        "id": "https://decrypt.co/365276/french-weather-agency-alerts-police-to-sensor-interference-after-35k-polymarket-payouts",
+        "title": "French Weather Agency Alerts Police to Sensor ‘Interference’ After $35K Polymarket Payouts",
+        "description": "Long-shot bets on a market tied to the daily maximum temperature in Paris have raised eyebrows—and triggered a police complaint.",
+        "content": "In brief\r\n<ul><li>Polymarket traders pocketed more than $35,000 after temperature spikes at a Météo France sensor resolved long-shot Paris weather bets in their favor.</li><li>Bubblemaps flagged a $1… [+4068 chars]",
+        "source_type": "news",
+        "source_name": "Decrypt",
+        "published_at": "2026-04-23T14:58:52+00:00",
+        "url": "https://decrypt.co/365276/french-weather-agency-alerts-police-to-sensor-interference-after-35k-polymarket-payouts",
+        "severity": "",
+        "cvss_score": null,
+        "related_cves": [],
+        "tags": []
+      },
+      {
+        "id": "https://cleantechnica.com/2026/04/23/iea-says-world-has-entered-the-age-of-electricity/",
+        "title": "IEA Says World Has Entered The “Age Of Electricity”",
+        "description": "The latest IEA energy report for 2025 shows solar and energy storage are rapidly displacing fossil fuels for energy generation. \nThe post IEA Says World Has Entered The “Age Of Electricity” appeared first on CleanTechnica.",
+        "content": "Support CleanTechnica's work through a Substack subscription or on Stripe.\r\nThe International Energy Agency global report for 2025 was released on April 20, 2026. It said,\r\n“Solar PV was the single l… [+7888 chars]",
+        "source_type": "news",
+        "source_name": "CleanTechnica",
+        "published_at": "2026-04-23T14:55:49+00:00",
+        "url": "https://cleantechnica.com/2026/04/23/iea-says-world-has-entered-the-age-of-electricity/",
+        "severity": "",
+        "cvss_score": null,
+        "related_cves": [],
+        "tags": []
+      },
+      {
+        "id": "https://www.whats-on-netflix.com/news/ransom-canyon-season-2-netflix-release-date-estimate-major-cast-changes-everything-we-know-so-far-04-2026/",
+        "title": "Ransom Canyon Season 2: Netflix Release Date Estimate & Everything We Know So Far",
+        "description": "Filming has long been completed but will the series be back in 2026?",
+        "content": "Picture Credit: Netflix\r\nRansom Canyon is officially coming back for a season 2 following its renewal earlier in 2025. Production has now wrapped on the second season, and if you’re looking for every… [+8999 chars]",
+        "source_type": "news",
+        "source_name": "What's on Netflix",
+        "published_at": "2026-04-23T14:54:53+00:00",
+        "url": "https://www.whats-on-netflix.com/news/ransom-canyon-season-2-netflix-release-date-estimate-major-cast-changes-everything-we-know-so-far-04-2026/",
+        "severity": "",
+        "cvss_score": null,
+        "related_cves": [],
+        "tags": []
+      },
+      {
+        "id": "https://www.gamesindustry.biz/how-have-things-been-going-at-rovio-since-it-was-bought-by-sega",
+        "title": "How have things been going at Rovio since it was bought by Sega?",
+        "description": "One of the privileges of being a journalist is that you get to indulge your nosiness. So after wondering how things have been going at Rovio since the Finnish Angry Birds firm was bought by Sega in 2023 for a cool $776 million, we decided to pick up the phone…",
+        "content": "One of the privileges of being a journalist is that you get to indulge your nosiness. So after wondering how things have been going at Rovio since the Finnish Angry Birds firm was bought by Sega in 2… [+11206 chars]",
+        "source_type": "news",
+        "source_name": "GamesIndustry.biz",
+        "published_at": "2026-04-23T14:54:00+00:00",
+        "url": "https://www.gamesindustry.biz/how-have-things-been-going-at-rovio-since-it-was-bought-by-sega",
+        "severity": "",
+        "cvss_score": null,
+        "related_cves": [],
+        "tags": []
+      },
+      {
+        "id": "https://mattlemay.beehiiv.com/p/fomonetization",
+        "title": "It’s Not AI. It’s FOMOnetization.",
+        "description": "FOMO is a feeling. But it’s also a business model—and increasingly, one of the more successful ones. Fear, in general, makes people much easier to separate from their money. It’s perfectly suited to this moment of ubiquitous grift, where everything feels like…",
+        "content": "As you may have heard, a defunct ugly shoe company announced an unsubstantiated pivot to AI and immediately enjoyed a 600% boost in their stock price.\r\nSomehow, their stock is still trading 3 times h… [+3947 chars]",
+        "source_type": "news",
+        "source_name": "Beehiiv.com",
+        "published_at": "2026-04-23T14:53:18+00:00",
+        "url": "https://mattlemay.beehiiv.com/p/fomonetization",
+        "severity": "",
+        "cvss_score": null,
+        "related_cves": [],
+        "tags": []
+      },
+      {
+        "id": "https://economictimes.indiatimes.com/news/international/business/paramount-warner-bros-merger-81-billion-takeover-hollywood-streaming-shakeup-what-it-means/articleshow/130471993.cms",
+        "title": "What a Paramount-Warner combo would spell for Hollywood",
+        "description": "In a bold strategic maneuver, Paramount is on the verge of finalizing an $81 billion deal to purchase Warner Bros. Discovery. This monumental merger will blend popular streaming giants like HBO Max and Paramount+, while also consolidating major studios and ne…",
+        "content": "NEW YORK - HBO Max, \"Harry Potter\" and CNN may soon find themselves under a new roof: Paramount.That's because shareholders of Warner Bros. Discovery on Thursday voted to sell the entire business to … [+7220 chars]",
+        "source_type": "news",
+        "source_name": "The Times of India",
+        "published_at": "2026-04-23T14:53:15+00:00",
+        "url": "https://economictimes.indiatimes.com/news/international/business/paramount-warner-bros-merger-81-billion-takeover-hollywood-streaming-shakeup-what-it-means/articleshow/130471993.cms",
+        "severity": "",
+        "cvss_score": null,
+        "related_cves": [],
+        "tags": []
+      },
+      {
+        "id": "https://www.tomshardware.com/tech-industry/cyber-security/uk-spy-agency-releases-malware-blocking-gadget-for-hdmi-and-displayport-cables-silentglass-blocks-malicious-traffic-traveling-between-display-and-computer",
+        "title": "UK spy agency releases malware-blocking gadget for HDMI and DisplayPort cables — SilentGlass blocks malicious traffic traveling between display and computer",
+        "description": "The NCSC, a part of the British GCHQ, has deployed this protective gadget throughout various government estates and is now making it publicly available through Goldilock Labs.",
+        "content": "The UK’s Government Communications Headquarters (GCHQ), a counterpart to the U.S.’s National Security Agency (NSA), just launched SilentGlass through the National Cyber Security Center (NCSC). This l… [+3553 chars]",
+        "source_type": "news",
+        "source_name": "Tom's Hardware UK",
+        "published_at": "2026-04-23T14:52:23+00:00",
+        "url": "https://www.tomshardware.com/tech-industry/cyber-security/uk-spy-agency-releases-malware-blocking-gadget-for-hdmi-and-displayport-cables-silentglass-blocks-malicious-traffic-traveling-between-display-and-computer",
+        "severity": "",
+        "cvss_score": null,
+        "related_cves": [],
+        "tags": []
+      },
+      {
+        "id": "https://cryptobriefing.com/lido-pauses-earneth-vault-activates-3m-protection-after-kelp-rseth-hack/",
+        "title": "Lido pauses EarnETH vault, activates $3M protection after Kelp rsETH hack",
+        "description": "The incident underscores the persistent vulnerabilities in DeFi, prompting increased scrutiny and potential regulatory responses to safeguard assets.\nThe post Lido pauses EarnETH vault, activates $3M protection after Kelp rsETH hack appeared first on Crypto B…",
+        "content": "Lido has paused its EarnETH vault and activated a $3 million first-loss protection after the Kelp rsETH hack. The crypto hack market for another $100 million+ incident by December 31 now sits at 100.… [+1290 chars]",
+        "source_type": "news",
+        "source_name": "Crypto Briefing",
+        "published_at": "2026-04-23T14:51:50+00:00",
+        "url": "https://cryptobriefing.com/lido-pauses-earneth-vault-activates-3m-protection-after-kelp-rseth-hack/",
+        "severity": "",
+        "cvss_score": null,
+        "related_cves": [],
+        "tags": []
+      },
+      {
+        "id": "https://www.thehindubusinessline.com/news/fm-met-banks-on-mythos-threat-dfs-secretary-nagaraj-called-it-a-threat-as-well-as-opportunity/article70898166.ece",
+        "title": "FM met banks on Mythos threat, DFS Secretary Nagaraj called it a threat as well as opportunity",
+        "description": "According to sources, the meeting chaired by the Finance Minister deliberated on various risks that AI posed on the financial sector.",
+        "content": "Finance Minister Nirmala Sitharaman on Thursday met bank chiefs to discuss risks related to Artificial Intelligence (AI) following global concerns over Anthropics Mythos model threatening data securi… [+3451 chars]",
+        "source_type": "news",
+        "source_name": "BusinessLine",
+        "published_at": "2026-04-23T14:48:55+00:00",
+        "url": "https://www.thehindubusinessline.com/news/fm-met-banks-on-mythos-threat-dfs-secretary-nagaraj-called-it-a-threat-as-well-as-opportunity/article70898166.ece",
+        "severity": "",
+        "cvss_score": null,
+        "related_cves": [],
+        "tags": []
+      },
+      {
+        "id": "https://cryptoslate.com/us-admiral-who-blasted-crypto-is-now-running-a-bitcoin-node-for-americas-security/",
+        "title": "US admiral who blasted crypto is now running a Bitcoin node for America’s security",
+        "description": "Admiral Samuel Paparo appeared before the Senate Armed Services Committee on Apr. 21 for a posture review for the US Indo-Pacific Command ahead of the fiscal year 2027 defense request. Paparo reportedly disclosed that INDOPACOM is running a Bitcoin node and t…",
+        "content": "Admiral Samuel Paparo appeared before the Senate Armed Services Committee on Apr. 21 for a posture review for the US Indo-Pacific Command ahead of the fiscal year 2027 defense request.\r\nPaparo report… [+6184 chars]",
+        "source_type": "news",
+        "source_name": "CryptoSlate",
+        "published_at": "2026-04-23T14:48:13+00:00",
+        "url": "https://cryptoslate.com/us-admiral-who-blasted-crypto-is-now-running-a-bitcoin-node-for-americas-security/",
+        "severity": "",
+        "cvss_score": null,
+        "related_cves": [],
+        "tags": []
+      },
+      {
+        "id": "https://www.globenewswire.com/news-release/2026/04/23/3280147/0/en/ACNB-Corporation-Reports-2026-First-Quarter-Financial-Results.html",
+        "title": "ACNB Corporation Reports 2026 First Quarter Financial Results",
+        "description": "GETTYSBURG, Pa., April 23, 2026 (GLOBE NEWSWIRE) -- ACNB  Corporation  (NASDAQ:  ACNB)  (“ACNB”  or  the “Corporation”), financial holding company for ACNB Bank and ACNB Insurance Services, Inc., announced net income of $13.7 million, or $1.32 diluted earning…",
+        "content": "GETTYSBURG, Pa., April 23, 2026 (GLOBE NEWSWIRE) -- ACNB  Corporation  (NASDAQ:  ACNB)  (ACNB  or  the Corporation), financial holding company for ACNB Bank and ACNB Insurance Services, Inc., announc… [+58993 chars]",
+        "source_type": "news",
+        "source_name": "GlobeNewswire",
+        "published_at": "2026-04-23T14:47:00+00:00",
+        "url": "https://www.globenewswire.com/news-release/2026/04/23/3280147/0/en/ACNB-Corporation-Reports-2026-First-Quarter-Financial-Results.html",
+        "severity": "",
+        "cvss_score": null,
+        "related_cves": [],
+        "tags": []
+      }
+    ],
+    "blogs": [],
+    "cves": [
+      {
+        "id": "CVE-2026-37749",
+        "title": "CVE-2026-37749",
+        "description": "A SQL injection vulnerability in CodeAstro Simple Attendance Management System v1.0 allows remote unauthenticated attackers to bypass authentication via the username parameter in index.php.",
+        "content": "A SQL injection vulnerability in CodeAstro Simple Attendance Management System v1.0 allows remote unauthenticated attackers to bypass authentication via the username parameter in index.php.",
+        "source_type": "cve",
+        "source_name": "NVD",
+        "published_at": "2026-04-17T15:16:51.763",
+        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-37749",
+        "severity": "CRITICAL",
+        "cvss_score": 9.8,
+        "related_cves": [],
+        "cwes": [
+          "CWE-89"
+        ],
+        "references": [
+          "https://codeastro.com/simple-attendance-management-system-in-php-with-source-code/",
+          "https://github.com/menevarad007/CVE-2026-37749"
+        ],
+        "tags": []
+      },
+      {
+        "id": "CVE-2026-41153",
+        "title": "CVE-2026-41153",
+        "description": "In JetBrains Junie before 252.549.29 command execution was possible via malicious project file",
+        "content": "In JetBrains Junie before 252.549.29 command execution was possible via malicious project file",
+        "source_type": "cve",
+        "source_name": "NVD",
+        "published_at": "2026-04-17T15:16:51.853",
+        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41153",
+        "severity": "MEDIUM",
+        "cvss_score": 5.8,
+        "related_cves": [],
+        "cwes": [
+          "CWE-77"
+        ],
+        "references": [
+          "https://www.jetbrains.com/privacy-security/issues-fixed/"
+        ],
+        "tags": []
+      },
+      {
+        "id": "CVE-2026-6493",
+        "title": "CVE-2026-6493",
+        "description": "A flaw has been found in lukevella rallly up to 4.7.4. This affects an unknown function of the file apps/web/src/app/[locale]/(auth)/reset-password/components/reset-password-form.tsx of the component Reset Password Handler. Executing a manipulation of the argument redirectTo can lead to cross site scripting. The attack can be executed remotely. The exploit has been published and may be used. Upgrading to version 4.8.0 mitigates this issue. Upgrading the affected component is advised. The vendor was contacted early about this disclosure.",
+        "content": "A flaw has been found in lukevella rallly up to 4.7.4. This affects an unknown function of the file apps/web/src/app/[locale]/(auth)/reset-password/components/reset-password-form.tsx of the component Reset Password Handler. Executing a manipulation of the argument redirectTo can lead to cross site scripting. The attack can be executed remotely. The exploit has been published and may be used. Upgrading to version 4.8.0 mitigates this issue. Upgrading the affected component is advised. The vendor was contacted early about this disclosure.",
+        "source_type": "cve",
+        "source_name": "NVD",
+        "published_at": "2026-04-17T15:16:52.313",
+        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-6493",
+        "severity": "LOW",
+        "cvss_score": 3.5,
+        "related_cves": [],
+        "cwes": [
+          "CWE-79",
+          "CWE-94"
+        ],
+        "references": [
+          "https://gist.github.com/TrebledJ/0bd0494a28daaa16abb565b2cef4bd7c",
+          "https://github.com/lukevella/rallly/",
+          "https://github.com/lukevella/rallly/pull/2245",
+          "https://github.com/lukevella/rallly/releases/tag/v4.8.0",
+          "https://vuldb.com/submit/787347",
+          "https://vuldb.com/vuln/358037",
+          "https://vuldb.com/vuln/358037/cti"
+        ],
+        "tags": []
+      },
+      {
+        "id": "CVE-2026-6496",
+        "title": "CVE-2026-6496",
+        "description": "A vulnerability was found in prasathmani TinyFileManager up to 2.6. Affected is an unknown function of the file /filemanager.php of the component POST Parameter Handler. The manipulation of the argument file[] results in path traversal. The attack may be performed from remote. The exploit has been made public and could be used. The vendor was contacted early about this disclosure but did not respond in any way.",
+        "content": "A vulnerability was found in prasathmani TinyFileManager up to 2.6. Affected is an unknown function of the file /filemanager.php of the component POST Parameter Handler. The manipulation of the argument file[] results in path traversal. The attack may be performed from remote. The exploit has been made public and could be used. The vendor was contacted early about this disclosure but did not respond in any way.",
+        "source_type": "cve",
+        "source_name": "NVD",
+        "published_at": "2026-04-17T15:16:52.480",
+        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-6496",
+        "severity": "MEDIUM",
+        "cvss_score": 5.4,
+        "related_cves": [],
+        "cwes": [
+          "CWE-22"
+        ],
+        "references": [
+          "https://drive.google.com/file/d/14taA8w3e5z3gl4WttpB4_CquwQdz1i6r/view?usp=sharing",
+          "https://vuldb.com/submit/787942",
+          "https://vuldb.com/vuln/358039",
+          "https://vuldb.com/vuln/358039/cti"
+        ],
+        "tags": []
+      },
+      {
+        "id": "CVE-2026-21709",
+        "title": "CVE-2026-21709",
+        "description": "A vulnerability allowing a local attacker with administrator privileges to bypass Windows Driver Signature Enforcement.",
+        "content": "A vulnerability allowing a local attacker with administrator privileges to bypass Windows Driver Signature Enforcement.",
+        "source_type": "cve",
+        "source_name": "NVD",
+        "published_at": "2026-04-17T16:16:36.413",
+        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-21709",
+        "severity": "MEDIUM",
+        "cvss_score": 6.7,
+        "related_cves": [],
+        "cwes": [
+          "CWE-77"
+        ],
+        "references": [
+          "https://www.veeam.com/kb4830",
+          "https://www.veeam.com/kb4831"
+        ],
+        "tags": []
+      },
+      {
+        "id": "CVE-2026-6284",
+        "title": "CVE-2026-6284",
+        "description": "An attacker with network access to the PLC is able to brute force discover passwords to gain unauthorized access to systems and services. The limited password complexity and no password input limiters makes brute force password enumeration possible.",
+        "content": "An attacker with network access to the PLC is able to brute force discover passwords to gain unauthorized access to systems and services. The limited password complexity and no password input limiters makes brute force password enumeration possible.",
+        "source_type": "cve",
+        "source_name": "NVD",
+        "published_at": "2026-04-17T16:17:07.620",
+        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-6284",
+        "severity": "CRITICAL",
+        "cvss_score": 9.1,
+        "related_cves": [],
+        "cwes": [
+          "CWE-521"
+        ],
+        "references": [
+          "https://github.com/cisagov/CSAF/blob/develop/csaf_files/OT/white/2026/icsa-26-106-02.json",
+          "https://hornerautomation.com/cscape-software-free/cscape-software/",
+          "https://www.cisa.gov/news-events/ics-advisories/icsa-26-106-02"
+        ],
+        "tags": []
+      },
+      {
+        "id": "CVE-2026-6497",
+        "title": "CVE-2026-6497",
+        "description": "A vulnerability was determined in prasathmani TinyFileManager up to 2.6. Affected by this vulnerability is an unknown functionality of the file /filemanager.php?p= ajax=true&type=upload of the component File Upload Handler. This manipulation of the argument uploadurl causes server-side request forgery. It is possible to initiate the attack remotely. The exploit has been publicly disclosed and may be utilized. The vendor was contacted early about this disclosure but did not respond in any way.",
+        "content": "A vulnerability was determined in prasathmani TinyFileManager up to 2.6. Affected by this vulnerability is an unknown functionality of the file /filemanager.php?p= ajax=true&type=upload of the component File Upload Handler. This manipulation of the argument uploadurl causes server-side request forgery. It is possible to initiate the attack remotely. The exploit has been publicly disclosed and may be utilized. The vendor was contacted early about this disclosure but did not respond in any way.",
+        "source_type": "cve",
+        "source_name": "NVD",
+        "published_at": "2026-04-17T16:17:07.763",
+        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-6497",
+        "severity": "MEDIUM",
+        "cvss_score": 6.3,
+        "related_cves": [],
+        "cwes": [
+          "CWE-918"
+        ],
+        "references": [
+          "https://drive.google.com/file/d/1pB3dI4oUy09mAtDHWbLlcoRRC1b3YU6k/view?usp=sharing",
+          "https://vuldb.com/submit/787943",
+          "https://vuldb.com/vuln/358040",
+          "https://vuldb.com/vuln/358040/cti"
+        ],
+        "tags": []
+      },
+      {
+        "id": "CVE-2026-21733",
+        "title": "CVE-2026-21733",
+        "description": "Vulnerability in Imagination Technologies Graphics DDK on Linux, Android -- \nRESERVED",
+        "content": "Vulnerability in Imagination Technologies Graphics DDK on Linux, Android -- \nRESERVED",
+        "source_type": "cve",
+        "source_name": "NVD",
+        "published_at": "2026-04-17T17:16:35.220",
+        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-21733",
+        "severity": "HIGH",
+        "cvss_score": 7.3,
+        "related_cves": [],
+        "cwes": [],
+        "references": [
+          "https://www.imaginationtech.com/gpu-driver-vulnerabilities/"
+        ],
+        "tags": []
+      },
+      {
+        "id": "CVE-2026-3464",
+        "title": "CVE-2026-3464",
+        "description": "The WP Customer Area plugin for WordPress is vulnerable to arbitrary file read and deletion due to insufficient file path validation in the 'ajax_attach_file' function in all versions up to, and including, 8.3.4. This makes it possible for authenticated attackers with a role that an administrator grants access to (e.g., Subscriber) to to read the contents of arbitrary files on the server, which can contain sensitive information, or delete arbitrary files on the server, which can easily lead to remote code execution when the right file is deleted (such as wp-config.php).",
+        "content": "The WP Customer Area plugin for WordPress is vulnerable to arbitrary file read and deletion due to insufficient file path validation in the 'ajax_attach_file' function in all versions up to, and including, 8.3.4. This makes it possible for authenticated attackers with a role that an administrator grants access to (e.g., Subscriber) to to read the contents of arbitrary files on the server, which can contain sensitive information, or delete arbitrary files on the server, which can easily lead to remote code execution when the right file is deleted (such as wp-config.php).",
+        "source_type": "cve",
+        "source_name": "NVD",
+        "published_at": "2026-04-17T17:17:07.217",
+        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-3464",
+        "severity": "HIGH",
+        "cvss_score": 8.8,
+        "related_cves": [],
+        "cwes": [
+          "CWE-22"
+        ],
+        "references": [
+          "https://plugins.trac.wordpress.org/browser/customer-area/tags/8.3.4/src/js/common/files/file-attachment-manager.js#L170",
+          "https://plugins.trac.wordpress.org/browser/customer-area/tags/8.3.4/src/js/common/files/ftp-uploader.js#L63",
+          "https://plugins.trac.wordpress.org/browser/customer-area/tags/8.3.4/src/php/core-addons/private-file/private-file-addon.class.php#L844",
+          "https://plugins.trac.wordpress.org/browser/customer-area/tags/8.3.4/src/php/core-addons/private-file/private-file-addon.class.php#L883",
+          "https://plugins.trac.wordpress.org/browser/customer-area/tags/8.3.4/src/php/core-addons/private-file/private-file-addon.class.php#L920",
+          "https://plugins.trac.wordpress.org/browser/customer-area/tags/8.3.4/src/php/core-addons/private-file/private-file-default-handlers.class.php#L404",
+          "https://plugins.trac.wordpress.org/browser/customer-area/tags/8.3.4/src/php/core-addons/private-file/private-file-default-handlers.class.php#L422",
+          "https://plugins.trac.wordpress.org/browser/customer-area/tags/8.3.4/src/php/core-addons/private-file/private-file-default-handlers.class.php#L428",
+          "https://plugins.trac.wordpress.org/browser/customer-area/tags/8.3.4/src/php/core-addons/private-file/templates/private-attachments-add-ftp-folder-frontend.template.php#L17",
+          "https://plugins.trac.wordpress.org/changeset/3507868/customer-area",
+          "https://www.wordfence.com/threat-intel/vulnerabilities/id/aadf1f4c-c852-4167-9b09-7e679a953725?source=cve"
+        ],
+        "tags": []
+      },
+      {
+        "id": "CVE-2026-40515",
+        "title": "CVE-2026-40515",
+        "description": "OpenHarness before commit bd4df81 contains a permission bypass vulnerability that allows attackers to read sensitive files by exploiting incomplete path normalization in the permission checker. Attackers can invoke the built-in grep and glob tools with sensitive root directories that are not properly evaluated against configured path rules, allowing disclosure of sensitive local file content, key material, configuration files, or directory contents despite configured path restrictions.",
+        "content": "OpenHarness before commit bd4df81 contains a permission bypass vulnerability that allows attackers to read sensitive files by exploiting incomplete path normalization in the permission checker. Attackers can invoke the built-in grep and glob tools with sensitive root directories that are not properly evaluated against configured path rules, allowing disclosure of sensitive local file content, key material, configuration files, or directory contents despite configured path restrictions.",
+        "source_type": "cve",
+        "source_name": "NVD",
+        "published_at": "2026-04-17T17:17:09.067",
+        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-40515",
+        "severity": "HIGH",
+        "cvss_score": 7.5,
+        "related_cves": [],
+        "cwes": [
+          "CWE-863"
+        ],
+        "references": [
+          "https://github.com/HKUDS/OpenHarness/commit/bd4df81f634f8c7cddcc3fdf7f561a13dcbf03ae",
+          "https://github.com/HKUDS/OpenHarness/pull/92",
+          "https://www.vulncheck.com/advisories/openharness-permission-bypass-via-grep-and-glob-root-argument"
+        ],
+        "tags": []
+      },
+      {
+        "id": "CVE-2026-40516",
+        "title": "CVE-2026-40516",
+        "description": "OpenHarness before commit bd4df81 contains a server-side request forgery vulnerability in the web_fetch and web_search tools that allows attackers to access private and localhost HTTP services by manipulating tool parameters without proper validation of target addresses. Attackers can influence an agent session to invoke these tools against loopback, RFC1918, link-local, or other non-public addresses to read response bodies from local development services, cloud metadata endpoints, admin panels, or other private HTTP services reachable from the victim host.",
+        "content": "OpenHarness before commit bd4df81 contains a server-side request forgery vulnerability in the web_fetch and web_search tools that allows attackers to access private and localhost HTTP services by manipulating tool parameters without proper validation of target addresses. Attackers can influence an agent session to invoke these tools against loopback, RFC1918, link-local, or other non-public addresses to read response bodies from local development services, cloud metadata endpoints, admin panels, or other private HTTP services reachable from the victim host.",
+        "source_type": "cve",
+        "source_name": "NVD",
+        "published_at": "2026-04-17T17:17:09.327",
+        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-40516",
+        "severity": "HIGH",
+        "cvss_score": 8.3,
+        "related_cves": [],
+        "cwes": [
+          "CWE-918"
+        ],
+        "references": [
+          "https://github.com/HKUDS/OpenHarness/commit/bd4df81f634f8c7cddcc3fdf7f561a13dcbf03ae",
+          "https://github.com/HKUDS/OpenHarness/pull/92",
+          "https://www.vulncheck.com/advisories/openharness-ssrf-via-web-fetch-and-web-search",
+          "https://github.com/HKUDS/OpenHarness/pull/92"
+        ],
+        "tags": []
+      },
+      {
+        "id": "CVE-2026-40518",
+        "title": "CVE-2026-40518",
+        "description": "ByteDance DeerFlow before commit 2176b2b contains a path traversal and arbitrary file write vulnerability in bootstrap-mode custom-agent creation where the agent name validation is bypassed. Attackers can supply traversal-style values or absolute paths as the agent name to influence directory creation and write files outside the intended custom-agent directory, potentially achieving arbitrary file write on the system subject to filesystem permissions.",
+        "content": "ByteDance DeerFlow before commit 2176b2b contains a path traversal and arbitrary file write vulnerability in bootstrap-mode custom-agent creation where the agent name validation is bypassed. Attackers can supply traversal-style values or absolute paths as the agent name to influence directory creation and write files outside the intended custom-agent directory, potentially achieving arbitrary file write on the system subject to filesystem permissions.",
+        "source_type": "cve",
+        "source_name": "NVD",
+        "published_at": "2026-04-17T17:17:09.543",
+        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-40518",
+        "severity": "HIGH",
+        "cvss_score": 7.1,
+        "related_cves": [],
+        "cwes": [
+          "CWE-22"
+        ],
+        "references": [
+          "https://github.com/bytedance/deer-flow/commit/2176b2bbfccfce25ceee08318813f96d843a13fd",
+          "https://github.com/bytedance/deer-flow/pull/2274",
+          "https://www.vulncheck.com/advisories/bytedance-deerflow-path-traversal-and-arbitrary-file-write-via-bootstrap-mode"
+        ],
+        "tags": []
+      },
+      {
+        "id": "CVE-2025-65104",
+        "title": "CVE-2025-65104",
+        "description": "Firebird is an open-source relational database management system. In versions FB3 of the client library placed incorrect data length values into XSQLDA fields when communicating with FB4 or higher servers, resulting in an information leak. This issue is fixed by upgrading to the FB4 client or higher.",
+        "content": "Firebird is an open-source relational database management system. In versions FB3 of the client library placed incorrect data length values into XSQLDA fields when communicating with FB4 or higher servers, resulting in an information leak. This issue is fixed by upgrading to the FB4 client or higher.",
+        "source_type": "cve",
+        "source_name": "NVD",
+        "published_at": "2026-04-17T18:16:30.773",
+        "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-65104",
+        "severity": "HIGH",
+        "cvss_score": 7.9,
+        "related_cves": [],
+        "cwes": [
+          "CWE-200"
+        ],
+        "references": [
+          "https://github.com/FirebirdSQL/firebird/releases/tag/v4.0.0",
+          "https://github.com/FirebirdSQL/firebird/security/advisories/GHSA-mfpr-9886-xjhg"
+        ],
+        "tags": []
+      },
+      {
+        "id": "CVE-2026-40319",
+        "title": "CVE-2026-40319",
+        "description": "Giskard is an open-source testing framework for AI models. In versions prior to 1.0.2b1, the RegexMatching check passes a user-supplied regular expression pattern directly to Python's re.search() without any timeout or complexity guard. A crafted regex pattern can trigger catastrophic backtracking, causing the process to hang indefinitely. Exploitation requires write access to a check definition and subsequent execution of the test suite. This issue has been fixed in giskard-checks version 1.0.2b1.",
+        "content": "Giskard is an open-source testing framework for AI models. In versions prior to 1.0.2b1, the RegexMatching check passes a user-supplied regular expression pattern directly to Python's re.search() without any timeout or complexity guard. A crafted regex pattern can trigger catastrophic backtracking, causing the process to hang indefinitely. Exploitation requires write access to a check definition and subsequent execution of the test suite. This issue has been fixed in giskard-checks version 1.0.2b1.",
+        "source_type": "cve",
+        "source_name": "NVD",
+        "published_at": "2026-04-17T18:16:32.063",
+        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-40319",
+        "severity": "UNKNOWN",
+        "cvss_score": null,
+        "related_cves": [],
+        "cwes": [
+          "CWE-1333"
+        ],
+        "references": [
+          "https://github.com/Giskard-AI/giskard-oss/releases/tag/giskard-checks%2Fv1.0.2b1",
+          "https://github.com/Giskard-AI/giskard-oss/security/advisories/GHSA-rq2q-4r55-9877"
+        ],
+        "tags": []
+      },
+      {
+        "id": "CVE-2026-40320",
+        "title": "CVE-2026-40320",
+        "description": "Giskard is an open-source testing framework for AI models. In versions prior to 1.0.2b1, the ConformityCheck class rendered the rule parameter through Jinja2's default Template() constructor, silently interpreting template expressions at runtime. If check definitions are loaded from an untrusted source, a crafted rule string could achieve arbitrary code execution. Exploitation requires write access to a check definition and subsequent execution of the test suite. This issue has been fixed in giskard-checks version 1.0.2b1.",
+        "content": "Giskard is an open-source testing framework for AI models. In versions prior to 1.0.2b1, the ConformityCheck class rendered the rule parameter through Jinja2's default Template() constructor, silently interpreting template expressions at runtime. If check definitions are loaded from an untrusted source, a crafted rule string could achieve arbitrary code execution. Exploitation requires write access to a check definition and subsequent execution of the test suite. This issue has been fixed in giskard-checks version 1.0.2b1.",
+        "source_type": "cve",
+        "source_name": "NVD",
+        "published_at": "2026-04-17T18:16:32.203",
+        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-40320",
+        "severity": "UNKNOWN",
+        "cvss_score": null,
+        "related_cves": [],
+        "cwes": [
+          "CWE-1336"
+        ],
+        "references": [
+          "https://github.com/Giskard-AI/giskard-oss/releases/tag/giskard-checks%2Fv1.0.2b1",
+          "https://github.com/Giskard-AI/giskard-oss/security/advisories/GHSA-7xjm-g8f4-rp26"
+        ],
+        "tags": []
+      },
+      {
+        "id": "CVE-2026-5710",
+        "title": "CVE-2026-5710",
+        "description": "The Drag and Drop Multiple File Upload for Contact Form 7 plugin for WordPress is vulnerable to Path Traversal leading to Arbitrary File Read in versions up to and including 1.3.9.6. This is due to the plugin using client-supplied mfile[] POST values as the source of truth for email attachment selection without performing any server-side upload provenance check, path canonicalization, or directory containment boundary enforcement. In dnd_wpcf7_posted_data(), each user-submitted filename is directly appended to the plugin's upload URL without sanitization. In dnd_cf7_mail_components(), the URL is converted back to a filesystem path using str_replace() and only file_exists() is used as the acceptance check before attaching the file to the outgoing CF7 email. This makes it possible for unauthenticated attackers to read and exfiltrate arbitrary files readable by the web server process via path traversal sequences in the mfile[] parameter, with files being disclosed as email attachments. Note: This vulnerability is limited to the 'wp-content' folder due to the wpcf7_is_file_path_in_content_dir() function in the Contact Form 7 plugin.",
+        "content": "The Drag and Drop Multiple File Upload for Contact Form 7 plugin for WordPress is vulnerable to Path Traversal leading to Arbitrary File Read in versions up to and including 1.3.9.6. This is due to the plugin using client-supplied mfile[] POST values as the source of truth for email attachment selection without performing any server-side upload provenance check, path canonicalization, or directory containment boundary enforcement. In dnd_wpcf7_posted_data(), each user-submitted filename is directly appended to the plugin's upload URL without sanitization. In dnd_cf7_mail_components(), the URL is converted back to a filesystem path using str_replace() and only file_exists() is used as the acceptance check before attaching the file to the outgoing CF7 email. This makes it possible for unauthenticated attackers to read and exfiltrate arbitrary files readable by the web server process via path traversal sequences in the mfile[] parameter, with files being disclosed as email attachments. Note: This vulnerability is limited to the 'wp-content' folder due to the wpcf7_is_file_path_in_content_dir() function in the Contact Form 7 plugin.",
+        "source_type": "cve",
+        "source_name": "NVD",
+        "published_at": "2026-04-17T18:16:32.593",
+        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-5710",
+        "severity": "HIGH",
+        "cvss_score": 7.5,
+        "related_cves": [],
+        "cwes": [
+          "CWE-22"
+        ],
+        "references": [
+          "https://plugins.trac.wordpress.org/browser/drag-and-drop-multiple-file-upload-contact-form-7/tags/1.3.9.6/inc/dnd-upload-cf7.php#L203",
+          "https://plugins.trac.wordpress.org/browser/drag-and-drop-multiple-file-upload-contact-form-7/tags/1.3.9.6/inc/dnd-upload-cf7.php#L477",
+          "https://plugins.trac.wordpress.org/browser/drag-and-drop-multiple-file-upload-contact-form-7/tags/1.3.9.6/inc/dnd-upload-cf7.php#L718",
+          "https://plugins.trac.wordpress.org/changeset/3508522/drag-and-drop-multiple-file-upload-contact-form-7",
+          "https://www.wordfence.com/threat-intel/vulnerabilities/id/1005eb8c-da5a-4422-9d65-0f341ad755b2?source=cve"
+        ],
+        "tags": []
+      },
+      {
+        "id": "CVE-2026-5718",
+        "title": "CVE-2026-5718",
+        "description": "The Drag and Drop Multiple File Upload for Contact Form 7 plugin for WordPress is vulnerable to arbitrary file upload in versions up to, and including, 1.3.9.6. This is due to insufficient file type validation that occurs when custom blacklist types are configured, which replaces the default dangerous extension denylist instead of merging with it, and the wpcf7_antiscript_file_name() sanitization function being bypassed for filenames containing non-ASCII characters. This makes it possible for unauthenticated attackers to upload arbitrary files, such as PHP files, to the server, which can be leveraged to achieve remote code execution.",
+        "content": "The Drag and Drop Multiple File Upload for Contact Form 7 plugin for WordPress is vulnerable to arbitrary file upload in versions up to, and including, 1.3.9.6. This is due to insufficient file type validation that occurs when custom blacklist types are configured, which replaces the default dangerous extension denylist instead of merging with it, and the wpcf7_antiscript_file_name() sanitization function being bypassed for filenames containing non-ASCII characters. This makes it possible for unauthenticated attackers to upload arbitrary files, such as PHP files, to the server, which can be leveraged to achieve remote code execution.",
+        "source_type": "cve",
+        "source_name": "NVD",
+        "published_at": "2026-04-17T18:16:32.753",
+        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-5718",
+        "severity": "HIGH",
+        "cvss_score": 8.1,
+        "related_cves": [],
+        "cwes": [
+          "CWE-434"
+        ],
+        "references": [
+          "https://plugins.trac.wordpress.org/browser/drag-and-drop-multiple-file-upload-contact-form-7/tags/1.3.9.6/inc/dnd-upload-cf7.php#L62",
+          "https://plugins.trac.wordpress.org/browser/drag-and-drop-multiple-file-upload-contact-form-7/tags/1.3.9.6/inc/dnd-upload-cf7.php#L883",
+          "https://plugins.trac.wordpress.org/browser/drag-and-drop-multiple-file-upload-contact-form-7/tags/1.3.9.6/inc/dnd-upload-cf7.php#L970",
+          "https://plugins.trac.wordpress.org/browser/drag-and-drop-multiple-file-upload-contact-form-7/tags/1.3.9.6/inc/dnd-upload-cf7.php#L987",
+          "https://plugins.trac.wordpress.org/changeset/3508522/drag-and-drop-multiple-file-upload-contact-form-7",
+          "https://www.wordfence.com/threat-intel/vulnerabilities/id/38f95d40-a6d4-429c-9872-9d2531e942eb?source=cve"
+        ],
+        "tags": []
+      },
+      {
+        "id": "CVE-2026-27890",
+        "title": "CVE-2026-27890",
+        "description": "Firebird is an open-source relational database management system. In versions prior to 5.0.4, 4.0.7 and 3.0.14, when processing CNCT_specific_data segments during authentication, the server assumes segments arrive in strictly ascending order. If segments arrive out of order, the Array class's grow() method computes a negative size value, causing a SIGSEGV crash. An unauthenticated attacker who knows only the server's IP and port can exploit this to crash the server. This issue has been fixed in versions 5.0.4, 4.0.7 and 3.0.14.",
+        "content": "Firebird is an open-source relational database management system. In versions prior to 5.0.4, 4.0.7 and 3.0.14, when processing CNCT_specific_data segments during authentication, the server assumes segments arrive in strictly ascending order. If segments arrive out of order, the Array class's grow() method computes a negative size value, causing a SIGSEGV crash. An unauthenticated attacker who knows only the server's IP and port can exploit this to crash the server. This issue has been fixed in versions 5.0.4, 4.0.7 and 3.0.14.",
+        "source_type": "cve",
+        "source_name": "NVD",
+        "published_at": "2026-04-17T19:16:34.993",
+        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-27890",
+        "severity": "HIGH",
+        "cvss_score": 8.2,
+        "related_cves": [],
+        "cwes": [
+          "CWE-119",
+          "CWE-787"
+        ],
+        "references": [
+          "https://github.com/FirebirdSQL/firebird/releases/tag/v3.0.14",
+          "https://github.com/FirebirdSQL/firebird/releases/tag/v4.0.7",
+          "https://github.com/FirebirdSQL/firebird/releases/tag/v5.0.4",
+          "https://github.com/FirebirdSQL/firebird/security/advisories/GHSA-6crx-4g37-7j49"
+        ],
+        "tags": []
+      },
+      {
+        "id": "CVE-2026-28212",
+        "title": "CVE-2026-28212",
+        "description": "Firebird is an open-source relational database management system. In versions prior to 6.0.0, 5.0.4, 4.0.7 and 3.0.14, when processing an op_slice network packet, the server passes an unprepared structure containing a null pointer to the SDL_info() function, resulting in a null pointer dereference and server crash. An unauthenticated attacker can trigger this by sending a crafted packet to the server port. This issue has been fixed in versions 6.0.0, 5.0.4, 4.0.7 and 3.0.14.",
+        "content": "Firebird is an open-source relational database management system. In versions prior to 6.0.0, 5.0.4, 4.0.7 and 3.0.14, when processing an op_slice network packet, the server passes an unprepared structure containing a null pointer to the SDL_info() function, resulting in a null pointer dereference and server crash. An unauthenticated attacker can trigger this by sending a crafted packet to the server port. This issue has been fixed in versions 6.0.0, 5.0.4, 4.0.7 and 3.0.14.",
+        "source_type": "cve",
+        "source_name": "NVD",
+        "published_at": "2026-04-17T19:16:35.180",
+        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-28212",
+        "severity": "HIGH",
+        "cvss_score": 7.5,
+        "related_cves": [],
+        "cwes": [
+          "CWE-476"
+        ],
+        "references": [
+          "https://github.com/FirebirdSQL/firebird/releases/tag/v3.0.14",
+          "https://github.com/FirebirdSQL/firebird/releases/tag/v4.0.7",
+          "https://github.com/FirebirdSQL/firebird/releases/tag/v5.0.4",
+          "https://github.com/FirebirdSQL/firebird/security/advisories/GHSA-9884-9qm3-hqch"
+        ],
+        "tags": []
+      },
+      {
+        "id": "CVE-2026-28214",
+        "title": "CVE-2026-28214",
+        "description": "Firebird is an open-source relational database management system. In versions prior to 5.0.4, 4.0.7 and 3.0.14, the ClumpletReader::getClumpletSize() function can overflow the totalLength value when parsing a Wide type clumplet, causing an infinite loop. An authenticated user with INSERT privileges on any table can exploit this via a crafted Batch Parameter Block to cause a denial of service against the server. This issue has been fixed in versions 5.0.4, 4.0.7 and 3.0.14.",
+        "content": "Firebird is an open-source relational database management system. In versions prior to 5.0.4, 4.0.7 and 3.0.14, the ClumpletReader::getClumpletSize() function can overflow the totalLength value when parsing a Wide type clumplet, causing an infinite loop. An authenticated user with INSERT privileges on any table can exploit this via a crafted Batch Parameter Block to cause a denial of service against the server. This issue has been fixed in versions 5.0.4, 4.0.7 and 3.0.14.",
+        "source_type": "cve",
+        "source_name": "NVD",
+        "published_at": "2026-04-17T19:16:35.327",
+        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-28214",
+        "severity": "UNKNOWN",
+        "cvss_score": null,
+        "related_cves": [],
+        "cwes": [
+          "CWE-190",
+          "CWE-835"
+        ],
+        "references": [
+          "https://github.com/FirebirdSQL/firebird/releases/tag/v3.0.14",
+          "https://github.com/FirebirdSQL/firebird/releases/tag/v4.0.7",
+          "https://github.com/FirebirdSQL/firebird/releases/tag/v5.0.4",
+          "https://github.com/FirebirdSQL/firebird/security/advisories/GHSA-7cq5-994r-jhrf"
+        ],
+        "tags": []
+      },
+      {
+        "id": "CVE-2026-28224",
+        "title": "CVE-2026-28224",
+        "description": "Firebird is an open-source relational database management system. In versions prior to 5.0.4, 4.0.7 and 3.0.14, when the server receives an op_crypt_key_callback packet without prior authentication, the port_server_crypt_callback handler is not initialized, resulting in a null pointer dereference and server crash. An unauthenticated attacker who knows only the server's IP and port can exploit this to crash the server. This issue has been fixed in versions 5.0.4, 4.0.7 and 3.0.14.",
+        "content": "Firebird is an open-source relational database management system. In versions prior to 5.0.4, 4.0.7 and 3.0.14, when the server receives an op_crypt_key_callback packet without prior authentication, the port_server_crypt_callback handler is not initialized, resulting in a null pointer dereference and server crash. An unauthenticated attacker who knows only the server's IP and port can exploit this to crash the server. This issue has been fixed in versions 5.0.4, 4.0.7 and 3.0.14.",
+        "source_type": "cve",
+        "source_name": "NVD",
+        "published_at": "2026-04-17T19:16:35.983",
+        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-28224",
+        "severity": "HIGH",
+        "cvss_score": 8.2,
+        "related_cves": [],
+        "cwes": [
+          "CWE-476"
+        ],
+        "references": [
+          "https://github.com/FirebirdSQL/firebird/releases/tag/v3.0.14",
+          "https://github.com/FirebirdSQL/firebird/releases/tag/v4.0.7",
+          "https://github.com/FirebirdSQL/firebird/releases/tag/v5.0.4",
+          "https://github.com/FirebirdSQL/firebird/security/advisories/GHSA-xrcw-wpjx-pr95",
+          "https://github.com/FirebirdSQL/firebird/security/advisories/GHSA-xrcw-wpjx-pr95"
+        ],
+        "tags": []
+      },
+      {
+        "id": "CVE-2026-33337",
+        "title": "CVE-2026-33337",
+        "description": "Firebird is an open-source relational database management system. In versions prior to 5.0.4, 4.0.7 and 3.0.14, when deserializing a slice packet, the xdr_datum() function does not validate that a cstring length conforms to the slice descriptor bounds, allowing a cstring longer than the allocated buffer to overflow it. An unauthenticated attacker can exploit this by sending a crafted packet to the server, potentially causing a crash or other security impact. This issue has been fixed in versions 5.0.4, 4.0.7 and 3.0.14.",
+        "content": "Firebird is an open-source relational database management system. In versions prior to 5.0.4, 4.0.7 and 3.0.14, when deserializing a slice packet, the xdr_datum() function does not validate that a cstring length conforms to the slice descriptor bounds, allowing a cstring longer than the allocated buffer to overflow it. An unauthenticated attacker can exploit this by sending a crafted packet to the server, potentially causing a crash or other security impact. This issue has been fixed in versions 5.0.4, 4.0.7 and 3.0.14.",
+        "source_type": "cve",
+        "source_name": "NVD",
+        "published_at": "2026-04-17T19:16:36.223",
+        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-33337",
+        "severity": "HIGH",
+        "cvss_score": 7.5,
+        "related_cves": [],
+        "cwes": [
+          "CWE-120",
+          "CWE-502"
+        ],
+        "references": [
+          "https://github.com/FirebirdSQL/firebird/releases/tag/v3.0.14",
+          "https://github.com/FirebirdSQL/firebird/releases/tag/v4.0.7",
+          "https://github.com/FirebirdSQL/firebird/releases/tag/v5.0.4",
+          "https://github.com/FirebirdSQL/firebird/security/advisories/GHSA-89mq-229g-x47p"
+        ],
+        "tags": []
+      },
+      {
+        "id": "CVE-2026-40525",
+        "title": "CVE-2026-40525",
+        "description": "OpenViking prior to version 0.3.9 contains an authentication bypass vulnerability in the VikingBot OpenAPI HTTP route surface where the authentication check fails open when the api_key configuration value is unset or empty. Remote attackers with network access to the exposed service can invoke privileged bot-control functionality without providing a valid X-API-Key header, including submitting attacker-controlled prompts, creating or using bot sessions, and accessing downstream tools, integrations, secrets, or data accessible to the bot.",
+        "content": "OpenViking prior to version 0.3.9 contains an authentication bypass vulnerability in the VikingBot OpenAPI HTTP route surface where the authentication check fails open when the api_key configuration value is unset or empty. Remote attackers with network access to the exposed service can invoke privileged bot-control functionality without providing a valid X-API-Key header, including submitting attacker-controlled prompts, creating or using bot sessions, and accessing downstream tools, integrations, secrets, or data accessible to the bot.",
+        "source_type": "cve",
+        "source_name": "NVD",
+        "published_at": "2026-04-17T19:16:39.017",
+        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-40525",
+        "severity": "CRITICAL",
+        "cvss_score": 9.1,
+        "related_cves": [],
+        "cwes": [
+          "CWE-636"
+        ],
+        "references": [
+          "https://github.com/volcengine/OpenViking/commit/c7bb1676f4d037609f041bf39e4e2bd52e8f9820",
+          "https://github.com/volcengine/OpenViking/pull/1447",
+          "https://github.com/volcengine/OpenViking/releases/tag/v0.3.9",
+          "https://www.vulncheck.com/advisories/openviking-authentication-bypass-via-vikingbot-openapi"
+        ],
+        "tags": []
+      },
+      {
+        "id": "CVE-2026-6437",
+        "title": "CVE-2026-6437",
+        "description": "Improper neutralization of argument delimiters in the volume handling component in AWS EFS CSI Driver (aws-efs-csi-driver) before v3.0.1 allows remote authenticated users with PersistentVolume creation permissions to inject arbitrary mount options via comma injection.\n\n\n\n\nTo remediate this issue, users should upgrade to version v3.0.1",
+        "content": "Improper neutralization of argument delimiters in the volume handling component in AWS EFS CSI Driver (aws-efs-csi-driver) before v3.0.1 allows remote authenticated users with PersistentVolume creation permissions to inject arbitrary mount options via comma injection.\n\n\n\n\nTo remediate this issue, users should upgrade to version v3.0.1",
+        "source_type": "cve",
+        "source_name": "NVD",
+        "published_at": "2026-04-17T19:16:40.150",
+        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-6437",
+        "severity": "MEDIUM",
+        "cvss_score": 6.5,
+        "related_cves": [],
+        "cwes": [
+          "CWE-88"
+        ],
+        "references": [
+          "https://aws.amazon.com/security/security-bulletins/2026-016-aws/",
+          "https://github.com/kubernetes-sigs/aws-efs-csi-driver/releases/tag/v3.0.1",
+          "https://github.com/kubernetes-sigs/aws-efs-csi-driver/security/advisories/GHSA-mph4-q2vm-w2pw"
+        ],
+        "tags": []
+      },
+      {
+        "id": "CVE-2026-31927",
+        "title": "CVE-2026-31927",
+        "description": "Anviz CX7 Firmware is vulnerable to an authenticated CSV upload which allows path traversal \nto overwrite arbitrary files (e.g., /etc/shadow), enabling unauthorized \nSSH access when combined with debug‑setting changes",
+        "content": "Anviz CX7 Firmware is vulnerable to an authenticated CSV upload which allows path traversal \nto overwrite arbitrary files (e.g., /etc/shadow), enabling unauthorized \nSSH access when combined with debug‑setting changes",
+        "source_type": "cve",
+        "source_name": "NVD",
+        "published_at": "2026-04-17T20:16:33.370",
+        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-31927",
+        "severity": "MEDIUM",
+        "cvss_score": 4.9,
+        "related_cves": [],
+        "cwes": [
+          "CWE-23"
+        ],
+        "references": [
+          "https://github.com/cisagov/CSAF/blob/develop/csaf_files/OT/white/2026/icsa-26-106-03.json",
+          "https://www.anviz.com/contact-us.html",
+          "https://www.cisa.gov/news-events/ics-advisories/icsa-26-106-03"
+        ],
+        "tags": []
+      }
+    ]
+  },
+  "source_rollup": [
+    {
+      "source_type": "cve",
+      "source_name": "NVD",
+      "count": 25,
+      "sample_titles": [
+        "CVE-2026-37749",
+        "CVE-2026-41153",
+        "CVE-2026-6493"
+      ],
+      "latest_url": "https://nvd.nist.gov/vuln/detail/CVE-2026-31927"
+    },
+    {
+      "source_type": "news",
+      "source_name": "Abcnews.com",
+      "count": 1,
+      "sample_titles": [
+        "What a combined Paramount-Warner would mean"
+      ],
+      "latest_url": "https://abcnews.com/Entertainment/wireStory/combined-paramount-warner-132315228"
+    },
+    {
+      "source_type": "news",
+      "source_name": "Beehiiv.com",
+      "count": 1,
+      "sample_titles": [
+        "It’s Not AI. It’s FOMOnetization."
+      ],
+      "latest_url": "https://mattlemay.beehiiv.com/p/fomonetization"
+    },
+    {
+      "source_type": "news",
+      "source_name": "BusinessLine",
+      "count": 1,
+      "sample_titles": [
+        "FM met banks on Mythos threat, DFS Secretary Nagaraj called it a threat as well as opportunity"
+      ],
+      "latest_url": "https://www.thehindubusinessline.com/news/fm-met-banks-on-mythos-threat-dfs-secretary-nagaraj-called-it-a-threat-as-well-as-opportunity/article70898166.ece"
+    },
+    {
+      "source_type": "news",
+      "source_name": "Cisco.com",
+      "count": 1,
+      "sample_titles": [
+        "Continued Evolution of Persistence Mechanism Against Cisco Secure Firewall Adaptive Security Appliance and Secure Firewall Threat Defense"
+      ],
+      "latest_url": "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-asaftd-persist-CISAED25-03?vs_f=Cisco%20Security%20Advisory%26vs_cat=Security%20Intelligence%26vs_type=RSS%26vs_p=Continued%20Evolution%20of%20Persistence%20Mechanism%20Against%20Cisco%20Secure%20Firewall%20Adaptive%20Security%20Appliance%20and%20Secure%20Firewall%20Threat%20Defense%26vs_k=1"
+    },
+    {
+      "source_type": "news",
+      "source_name": "CleanTechnica",
+      "count": 1,
+      "sample_titles": [
+        "IEA Says World Has Entered The “Age Of Electricity”"
+      ],
+      "latest_url": "https://cleantechnica.com/2026/04/23/iea-says-world-has-entered-the-age-of-electricity/"
+    },
+    {
+      "source_type": "news",
+      "source_name": "Crypto Briefing",
+      "count": 1,
+      "sample_titles": [
+        "Lido pauses EarnETH vault, activates $3M protection after Kelp rsETH hack"
+      ],
+      "latest_url": "https://cryptobriefing.com/lido-pauses-earneth-vault-activates-3m-protection-after-kelp-rseth-hack/"
+    },
+    {
+      "source_type": "news",
+      "source_name": "CryptoSlate",
+      "count": 1,
+      "sample_titles": [
+        "US admiral who blasted crypto is now running a Bitcoin node for America’s security"
+      ],
+      "latest_url": "https://cryptoslate.com/us-admiral-who-blasted-crypto-is-now-running-a-bitcoin-node-for-americas-security/"
+    },
+    {
+      "source_type": "news",
+      "source_name": "Dailymail.com",
+      "count": 1,
+      "sample_titles": [
+        "Need morning naps? Experts say it could be a warning sign of a deadly illness"
+      ],
+      "latest_url": "https://www.dailymail.com/health/article-15759259/morning-naps-daytime-increase-risk-death-deadly-illness.html"
+    },
+    {
+      "source_type": "news",
+      "source_name": "Decrypt",
+      "count": 1,
+      "sample_titles": [
+        "French Weather Agency Alerts Police to Sensor ‘Interference’ After $35K Polymarket Payouts"
+      ],
+      "latest_url": "https://decrypt.co/365276/french-weather-agency-alerts-police-to-sensor-interference-after-35k-polymarket-payouts"
+    },
+    {
+      "source_type": "news",
+      "source_name": "Fortinet.com",
+      "count": 1,
+      "sample_titles": [
+        "The Fortinet 2025 Sustainability Report"
+      ],
+      "latest_url": "https://www.fortinet.com/blog/business-and-technology/the-fortinet-2025-sustainability-report"
+    },
+    {
+      "source_type": "news",
+      "source_name": "GamesIndustry.biz",
+      "count": 1,
+      "sample_titles": [
+        "How have things been going at Rovio since it was bought by Sega?"
+      ],
+      "latest_url": "https://www.gamesindustry.biz/how-have-things-been-going-at-rovio-since-it-was-bought-by-sega"
+    },
+    {
+      "source_type": "news",
+      "source_name": "GlobeNewswire",
+      "count": 1,
+      "sample_titles": [
+        "ACNB Corporation Reports 2026 First Quarter Financial Results"
+      ],
+      "latest_url": "https://www.globenewswire.com/news-release/2026/04/23/3280147/0/en/ACNB-Corporation-Reports-2026-First-Quarter-Financial-Results.html"
+    },
+    {
+      "source_type": "news",
+      "source_name": "Slashdot.org",
+      "count": 1,
+      "sample_titles": [
+        "UK spy agency releases malware-blocking gadget for HDMI and DisplayPort cables — SilentGlass blocks malicious traffic traveling between display and compu"
+      ],
+      "latest_url": "https://slashdot.org/firehose.pl?op=view&amp;id=181928452"
+    },
+    {
+      "source_type": "news",
+      "source_name": "Talosintelligence.com",
+      "count": 1,
+      "sample_titles": [
+        "UAT-4356's Targeting of Cisco Firepower Devices"
+      ],
+      "latest_url": "https://blog.talosintelligence.com/uat-4356-firestarter/"
+    },
+    {
+      "source_type": "news",
+      "source_name": "TechRadar",
+      "count": 1,
+      "sample_titles": [
+        "CrashPlan review"
+      ],
+      "latest_url": "https://www.techradar.com/reviews/crashplan-review"
+    },
+    {
+      "source_type": "news",
+      "source_name": "The Next Web",
+      "count": 1,
+      "sample_titles": [
+        "The Pentagon just picked the companies that will put nuclear reactors on Air Force bases"
+      ],
+      "latest_url": "https://thenextweb.com/news/us-microreactor-companies-air-force-bases-nuclear/"
+    },
+    {
+      "source_type": "news",
+      "source_name": "The Times of India",
+      "count": 1,
+      "sample_titles": [
+        "What a Paramount-Warner combo would spell for Hollywood"
+      ],
+      "latest_url": "https://economictimes.indiatimes.com/news/international/business/paramount-warner-bros-merger-81-billion-takeover-hollywood-streaming-shakeup-what-it-means/articleshow/130471993.cms"
+    },
+    {
+      "source_type": "news",
+      "source_name": "Tom's Hardware UK",
+      "count": 1,
+      "sample_titles": [
+        "UK spy agency releases malware-blocking gadget for HDMI and DisplayPort cables — SilentGlass blocks malicious traffic traveling between display and computer"
+      ],
+      "latest_url": "https://www.tomshardware.com/tech-industry/cyber-security/uk-spy-agency-releases-malware-blocking-gadget-for-hdmi-and-displayport-cables-silentglass-blocks-malicious-traffic-traveling-between-display-and-computer"
+    },
+    {
+      "source_type": "news",
+      "source_name": "What's on Netflix",
+      "count": 1,
+      "sample_titles": [
+        "Ransom Canyon Season 2: Netflix Release Date Estimate & Everything We Know So Far"
+      ],
+      "latest_url": "https://www.whats-on-netflix.com/news/ransom-canyon-season-2-netflix-release-date-estimate-major-cast-changes-everything-we-know-so-far-04-2026/"
+    }
+  ],
+  "report_library": [
+    {
+      "filename": "Cyber_Threat_Report_20260424_204446.pdf",
+      "path": "C:\\Users\\vigne\\AI Agent version2_autonomous\\Cyber_Threat_Report_20260424_204446.pdf",
+      "size_bytes": 16157,
+      "modified_at": "2026-04-24T15:14:46.051361+00:00",
+      "view_url": "/reports/Cyber_Threat_Report_20260424_204446.pdf",
+      "download_url": "/reports/Cyber_Threat_Report_20260424_204446.pdf?download=1"
+    },
+    {
+      "filename": "Cyber_Threat_Report_20260424_204031.pdf",
+      "path": "C:\\Users\\vigne\\AI Agent version2_autonomous\\Cyber_Threat_Report_20260424_204031.pdf",
+      "size_bytes": 2318,
+      "modified_at": "2026-04-24T15:10:31.370373+00:00",
+      "view_url": "/reports/Cyber_Threat_Report_20260424_204031.pdf",
+      "download_url": "/reports/Cyber_Threat_Report_20260424_204031.pdf?download=1"
+    },
+    {
+      "filename": "Cyber_Threat_Report_20260424_201839.pdf",
+      "path": "C:\\Users\\vigne\\AI Agent version2_autonomous\\Cyber_Threat_Report_20260424_201839.pdf",
+      "size_bytes": 23984,
+      "modified_at": "2026-04-24T14:48:39.487843+00:00",
+      "view_url": "/reports/Cyber_Threat_Report_20260424_201839.pdf",
+      "download_url": "/reports/Cyber_Threat_Report_20260424_201839.pdf?download=1"
+    },
+    {
+      "filename": "Cyber_Threat_Report_20260424_201410.pdf",
+      "path": "C:\\Users\\vigne\\AI Agent version2_autonomous\\Cyber_Threat_Report_20260424_201410.pdf",
+      "size_bytes": 2635,
+      "modified_at": "2026-04-24T14:44:10.114920+00:00",
+      "view_url": "/reports/Cyber_Threat_Report_20260424_201410.pdf",
+      "download_url": "/reports/Cyber_Threat_Report_20260424_201410.pdf?download=1"
+    },
+    {
+      "filename": "Cyber_Threat_Report_20260421_221230.pdf",
+      "path": "C:\\Users\\vigne\\AI Agent version2_autonomous\\Cyber_Threat_Report_20260421_221230.pdf",
+      "size_bytes": 8564,
+      "modified_at": "2026-04-21T16:42:30.631583+00:00",
+      "view_url": "/reports/Cyber_Threat_Report_20260421_221230.pdf",
+      "download_url": "/reports/Cyber_Threat_Report_20260421_221230.pdf?download=1"
+    },
+    {
+      "filename": "Cyber_Threat_Report_20260421_203400.pdf",
+      "path": "C:\\Users\\vigne\\AI Agent version2_autonomous\\Cyber_Threat_Report_20260421_203400.pdf",
+      "size_bytes": 9530,
+      "modified_at": "2026-04-21T15:04:00.523823+00:00",
+      "view_url": "/reports/Cyber_Threat_Report_20260421_203400.pdf",
+      "download_url": "/reports/Cyber_Threat_Report_20260421_203400.pdf?download=1"
+    }
+  ]
+}

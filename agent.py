@@ -1,503 +1,470 @@
-from langchain_groq import ChatGroq
-from langgraph.graph import StateGraph, END
-from typing import TypedDict, List, Dict, Optional, Literal
-from dotenv import load_dotenv
-import os
+from __future__ import annotations
+
 import json
 import logging
-from datetime import datetime
+import os
+import re
 import sys
-import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from dataclasses import dataclass
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any, Dict, List, Optional
 
-# Your modules
-from news import get_news
 from blogs import fetch_security_blogs
+from correlation import build_threat_dataset
 from cve import fetch_cve_data
-from correlation import correlate_data
+from env_utils import load_dotenv
+from http_utils import request_json
+from memory import build_memory_index, load_memory, update_memory
+from news import get_news
+from report import build_operational_recommendations, create_pdf, render_markdown_report
 from scoring import score_threats
-from memory import update_memory
-from report import create_pdf
-
-# Fix Windows console encoding
-if sys.platform == "win32":
-    sys.stdout.reconfigure(encoding='utf-8', errors='replace')
-    sys.stderr.reconfigure(encoding='utf-8', errors='replace')
-
-# Logging setup
-class SafeStreamHandler(logging.StreamHandler):
-    def emit(self, record):
-        try:
-            if sys.platform == "win32" and hasattr(record, 'msg') and isinstance(record.msg, str):
-                # Remove emojis for Windows console
-                import re
-                record.msg = re.sub(r'[^\x00-\x7F]+', '', record.msg)
-            super().emit(record)
-        except Exception:
-            pass
-
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler('cti_agent.log', encoding='utf-8'),
-        SafeStreamHandler()
-    ]
-)
-logger = logging.getLogger(__name__)
-
-# Load env
-load_dotenv()
-
-# LLM
-llm = ChatGroq(
-    model="llama-3.1-8b-instant",
-    temperature=0.1,
-    max_tokens=1000,
-    groq_api_key=os.getenv("GROQ_API_KEY")
-)
-
-# -------------------------------
-# Enhanced Agent State
-# -------------------------------
-class AgentState(TypedDict):
-    messages: List[str]
-    data: Dict
-    report: Optional[str]
-    errors: List[str]
-    iteration: int
-    high_severity_found: bool
-    decision_log: List[Dict]
 
 
-# -------------------------------
-# Nodes with Error Handling
-# -------------------------------
+PROJECT_DIR = Path(__file__).resolve().parent
+LOG_FILE = PROJECT_DIR / "cti_agent.log"
+LATEST_RUN_FILE = PROJECT_DIR / "latest_run.json"
+load_dotenv(PROJECT_DIR / ".env")
 
-def fetch_news_node(state: AgentState) -> AgentState:
-    """Fetch news with retry logic and error handling"""
+
+def _configure_logging() -> logging.Logger:
+    logger = logging.getLogger("cti_agent")
+    if logger.handlers:
+        return logger
+
+    logger.setLevel(logging.INFO)
+    formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
+
+    file_handler = logging.FileHandler(LOG_FILE, encoding="utf-8")
+    file_handler.setFormatter(formatter)
+    logger.addHandler(file_handler)
+
+    stream_handler = logging.StreamHandler(sys.stdout)
+    stream_handler.setFormatter(formatter)
+    logger.addHandler(stream_handler)
+
+    return logger
+
+
+LOGGER = _configure_logging()
+
+
+def _env_int(name: str, default: int) -> int:
+    value = os.getenv(name, str(default)).strip()
     try:
-        news = get_news(days=2)
-        
-        new_state = state.copy()
-        if "data" not in new_state:
-            new_state["data"] = {}
-        new_state["data"]["news"] = news
-        new_state["messages"].append(f"Fetched {len(news)} news articles")
-        
-        logger.info(f"News fetched: {len(news)} articles")
-        
-        if len(news) < 5:
-            new_state["messages"].append("Low news volume, may need alternative sources")
-            logger.warning("Low news article count")
-        
-        return new_state
-        
-    except Exception as e:
-        logger.error(f"News fetch failed: {str(e)}")
-        new_state = state.copy()
-        if "data" not in new_state:
-            new_state["data"] = {}
-        new_state["errors"].append(f"News fetch error: {str(e)}")
-        new_state["data"]["news"] = []
-        return new_state
+        return int(value)
+    except ValueError:
+        return default
 
 
-def fetch_blogs_node(state: AgentState) -> AgentState:
-    """Fetch security blogs with error handling"""
-    try:
-        blogs = fetch_security_blogs()
-        
-        new_state = state.copy()
-        if "data" not in new_state:
-            new_state["data"] = {}
-        new_state["data"]["blogs"] = blogs
-        new_state["messages"].append(f"Fetched {len(blogs)} blog posts")
-        
-        logger.info(f"Blogs fetched: {len(blogs)} posts")
-        return new_state
-        
-    except Exception as e:
-        logger.error(f"Blog fetch failed: {str(e)}")
-        new_state = state.copy()
-        if "data" not in new_state:
-            new_state["data"] = {}
-        new_state["errors"].append(f"Blog fetch error: {str(e)}")
-        new_state["data"]["blogs"] = []
-        return new_state
+def _utc_now_iso() -> str:
+    return datetime.now(timezone.utc).isoformat()
 
 
-def fetch_cves_node(state: AgentState) -> AgentState:
-    """Fetch CVEs with error handling"""
-    try:
-        cves = fetch_cve_data(days=2)
-        
-        new_state = state.copy()
-        if "data" not in new_state:
-            new_state["data"] = {}
-        new_state["data"]["cves"] = cves
-        new_state["messages"].append(f"Fetched {len(cves)} CVEs")
-        
-        logger.info(f"CVEs fetched: {len(cves)}")
-        
-        critical_cves = [c for c in cves if c.get("severity", "").upper() in ["CRITICAL", "HIGH"]]
-        if critical_cves:
-            new_state["high_severity_found"] = True
-            new_state["messages"].append(f"ALERT: {len(critical_cves)} critical/high CVEs detected")
-            logger.warning(f"High severity CVEs found: {len(critical_cves)}")
-        
-        return new_state
-        
-    except Exception as e:
-        logger.error(f"CVE fetch failed: {str(e)}")
-        new_state = state.copy()
-        if "data" not in new_state:
-            new_state["data"] = {}
-        new_state["errors"].append(f"CVE fetch error: {str(e)}")
-        new_state["data"]["cves"] = []
-        return new_state
+def _decision_breakdown(decisions: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    counts: Dict[str, int] = {}
+    for decision in decisions:
+        step = decision.get("step", "unknown")
+        counts[step] = counts.get(step, 0) + 1
+    return [{"step": step, "count": count} for step, count in sorted(counts.items())]
 
 
-def analyze_node(state: AgentState) -> AgentState:
-    """Analyze and score threats"""
-    try:
-        news = state.get("data", {}).get("news", [])
-        blogs = state.get("data", {}).get("blogs", [])
-        cves = state.get("data", {}).get("cves", [])
+def _source_rollup(collected: Dict[str, List[Dict[str, Any]]]) -> List[Dict[str, Any]]:
+    grouped: Dict[tuple[str, str], Dict[str, Any]] = {}
 
-        total_items = len(news) + len(blogs) + len(cves)
-        if total_items == 0:
-            logger.warning("No data to analyze")
-            new_state = state.copy()
-            if "data" not in new_state:
-                new_state["data"] = {}
-            new_state["messages"].append("No data available for analysis")
-            new_state["data"]["scored"] = []
-            return new_state
+    for category, items in collected.items():
+        for item in items:
+            source_type = (item.get("source_type") or category or "unknown").lower()
+            source_name = item.get("source_name") or "Unknown source"
+            key = (source_type, source_name)
+            if key not in grouped:
+                grouped[key] = {
+                    "source_type": source_type,
+                    "source_name": source_name,
+                    "count": 0,
+                    "sample_titles": [],
+                    "latest_url": item.get("url", ""),
+                }
 
-        logger.info(f"Analyzing {total_items} items")
+            bucket = grouped[key]
+            bucket["count"] += 1
+            if item.get("url"):
+                bucket["latest_url"] = item["url"]
 
-        correlated = correlate_data(news, cves)
-        merged = correlated + blogs
+            title = (item.get("title") or "").strip()
+            if title and len(bucket["sample_titles"]) < 3:
+                bucket["sample_titles"].append(title)
 
-        seen = set()
-        unique = []
-        for item in merged:
-            title = item.get("title", "")
-            if title and title not in seen:
-                seen.add(title)
-                unique.append(item)
-
-        scored = score_threats(unique)
-        update_memory(scored)
-
-        new_state = state.copy()
-        if "data" not in new_state:
-            new_state["data"] = {}
-        new_state["data"]["scored"] = scored
-        new_state["messages"].append(f"Analyzed {len(scored)} unique threats")
-        
-        high_threats = [t for t in scored if t.get("score", 0) >= 7.0]
-        if high_threats:
-            new_state["high_severity_found"] = True
-            if "decision_log" not in new_state:
-                new_state["decision_log"] = []
-            new_state["decision_log"].append({
-                "timestamp": datetime.now().isoformat(),
-                "decision": "high_severity_detected",
-                "count": len(high_threats),
-                "action": "will_prioritize_in_report"
-            })
-            logger.warning(f"High-severity threats detected: {len(high_threats)}")
-        
-        logger.info(f"Analysis complete: {len(scored)} threats scored")
-        return new_state
-        
-    except Exception as e:
-        logger.error(f"Analysis failed: {str(e)}")
-        new_state = state.copy()
-        if "data" not in new_state:
-            new_state["data"] = {}
-        new_state["errors"].append(f"Analysis error: {str(e)}")
-        new_state["data"]["scored"] = []
-        return new_state
+    return sorted(grouped.values(), key=lambda item: (-item.get("count", 0), item.get("source_name", "")))
 
 
-def decision_node(state: AgentState) -> AgentState:
-    """Agent makes intelligent decisions about report generation"""
-    scored_data = state.get("data", {}).get("scored", [])
-    
-    new_state = state.copy()
-    if "data" not in new_state:
-        new_state["data"] = {}
-    if "decision_log" not in new_state:
-        new_state["decision_log"] = []
-    
-    if len(scored_data) == 0:
-        new_state["decision_log"].append({
-            "timestamp": datetime.now().isoformat(),
-            "decision": "insufficient_data",
-            "action": "skip_report_generation"
-        })
-        new_state["messages"].append("No threats to report")
-        logger.warning("Skipping report: no data")
-        new_state["report"] = "NO_DATA"
-        return new_state
-    
-    high_severity = [t for t in scored_data if t.get("score", 0) >= 7.0]
-    
-    if len(high_severity) >= 3:
-        new_state["data"]["report_type"] = "urgent"
-        new_state["data"]["threat_limit"] = 10
-        new_state["decision_log"].append({
-            "timestamp": datetime.now().isoformat(),
-            "decision": "high_threat_volume",
-            "action": "generate_extended_urgent_report",
-            "high_severity_count": len(high_severity)
-        })
-        logger.warning(f"Generating URGENT report: {len(high_severity)} high-severity threats")
-    elif len(high_severity) > 0:
-        new_state["data"]["report_type"] = "priority"
-        new_state["data"]["threat_limit"] = 7
-        logger.info("Generating priority report")
-    else:
-        new_state["data"]["report_type"] = "standard"
-        new_state["data"]["threat_limit"] = 5
-        logger.info("Generating standard report")
-    
-    return new_state
-
-
-def generate_report_node(state: AgentState) -> AgentState:
-    """Generate intelligent report based on agent decisions"""
-    try:
-        if state.get("report") == "NO_DATA":
-            logger.info("Skipping report generation: no data")
-            return state
-        
-        scored_data = state.get("data", {}).get("scored", [])
-        report_type = state.get("data", {}).get("report_type", "standard")
-        threat_limit = state.get("data", {}).get("threat_limit", 5)
-        
-        top_threats = sorted(
-            scored_data, 
-            key=lambda x: x.get("score", 0), 
-            reverse=True
-        )[:threat_limit]
-        
-        data_str = json.dumps(top_threats, indent=2, ensure_ascii=False)
-        
-        urgency_context = ""
-        if report_type == "urgent":
-            urgency_context = """
-[URGENT] Multiple high-severity threats detected.
-Focus on immediate action items and critical system impact.
-"""
-        elif report_type == "priority":
-            urgency_context = """
-Priority threats identified. Emphasize risk assessment and mitigation steps.
-"""
-        
-        prompt = f"""
-You are a senior Cyber Threat Intelligence Analyst writing for a SOC team.
-
-{urgency_context}
-
-Generate a high-quality Cyber Threat Intelligence Report using ONLY the data below.
-
-Data:
-{data_str}
-
-STRICT RULES:
-- No generic statements
-- No filler sentences
-- Focus on real threats and impact
-- Use specific details from the data
-- For {report_type} reports: be direct and actionable
-
-FORMAT:
-
-## Executive Summary
-- 3-4 sentences
-- Highlight most critical threats with scores
-- {f"URGENT: Immediate action required" if report_type == "urgent" else ""}
-
-## Top Prioritized Threats
-For each threat (sorted by severity):
-- **Title** (Score: X.X/10)
-- **What Happened**: Specific incident details
-- **Impact**: Why it matters
-- **Associated CVEs**: (if any)
-- **Affected Systems**: Be specific
-
-## Key Insights
-- Attack trends or patterns
-- Common vulnerabilities
-- Threat actor TTPs (if identified)
-
-## Recommendations
-- Specific, actionable steps
-- Prioritized by threat score
-- Include detection/mitigation guidance
-
-Tone: Professional, analytical, urgent where appropriate.
-"""
-        
-        logger.info(f"Generating {report_type} report for {len(top_threats)} threats...")
-        
-        max_retries = 3
-        for attempt in range(max_retries):
-            try:
-                report_content = llm.invoke(prompt).content
-                break
-            except Exception as e:
-                if "429" in str(e) and attempt < max_retries - 1:
-                    wait_time = (attempt + 1) * 10
-                    logger.warning(f"Rate limited, waiting {wait_time} seconds...")
-                    time.sleep(wait_time)
-                else:
-                    raise
-        
-        filename = create_pdf(report_content, report_type=report_type)
-        
-        new_state = state.copy()
-        new_state["report"] = filename
-        new_state["messages"].append(f"{report_type.upper()} report generated: {filename}")
-        if "decision_log" not in new_state:
-            new_state["decision_log"] = []
-        new_state["decision_log"].append({
-            "timestamp": datetime.now().isoformat(),
-            "decision": "report_generated",
-            "type": report_type,
-            "threat_count": len(top_threats),
-            "filename": filename
-        })
-        
-        logger.info(f"Report saved: {filename}")
-        return new_state
-        
-    except Exception as e:
-        logger.error(f"Report generation failed: {str(e)}")
-        new_state = state.copy()
-        if "errors" not in new_state:
-            new_state["errors"] = []
-        new_state["errors"].append(f"Report generation error: {str(e)}")
-        return new_state
-
-
-# -------------------------------
-# Intelligent Routing
-# -------------------------------
-
-def route(state: AgentState):
-    """Intelligent routing based on state and errors"""
-    data = state.get("data", {})
-    iteration = state.get("iteration", 0)
-    
-    if iteration > 10:
-        logger.error("Max iterations reached, stopping")
-        return END
-    
-    if "news" not in data:
-        return "fetch_news"
-    
-    if "blogs" not in data:
-        return "fetch_blogs"
-    
-    if "cves" not in data:
-        return "fetch_cves"
-    
-    if "scored" not in data:
-        return "analyze"
-    
-    if "report_type" not in data:
-        return "decide"
-    
-    if not state.get("report"):
-        return "generate_report"
-    
-    return END
-
-
-# -------------------------------
-# Build Graph
-# -------------------------------
-
-builder = StateGraph(AgentState)
-
-builder.add_node("fetch_news", fetch_news_node)
-builder.add_node("fetch_blogs", fetch_blogs_node)
-builder.add_node("fetch_cves", fetch_cves_node)
-builder.add_node("analyze", analyze_node)
-builder.add_node("decide", decision_node)
-builder.add_node("generate_report", generate_report_node)
-
-builder.set_entry_point("fetch_news")
-
-builder.add_conditional_edges("fetch_news", route)
-builder.add_conditional_edges("fetch_blogs", route)
-builder.add_conditional_edges("fetch_cves", route)
-builder.add_conditional_edges("analyze", route)
-builder.add_conditional_edges("decide", route)
-builder.add_conditional_edges("generate_report", route)
-
-graph = builder.compile()
-
-
-# -------------------------------
-# Run Agent
-# -------------------------------
-
-def run_ai_agent():
-    """Execute the autonomous CTI agent"""
-    print("Autonomous Cyber Threat Intelligence Agent v2.0\n")
-    logger.info("=" * 60)
-    logger.info("Starting CTI Agent Run")
-    logger.info("=" * 60)
-
-    initial_state: AgentState = {
-        "messages": [],
-        "data": {},
-        "report": None,
-        "errors": [],
-        "iteration": 0,
-        "high_severity_found": False,
-        "decision_log": []
+def _report_record(path: Path) -> Dict[str, Any]:
+    stat = path.stat()
+    return {
+        "filename": path.name,
+        "path": str(path),
+        "size_bytes": stat.st_size,
+        "modified_at": datetime.fromtimestamp(stat.st_mtime, timezone.utc).isoformat(),
+        "view_url": f"/reports/{path.name}",
+        "download_url": f"/reports/{path.name}?download=1",
     }
 
-    try:
-        result = graph.invoke(
-            initial_state,
-            config={"recursion_limit": 50}
-        )
 
-        print("\n" + "=" * 60)
-        print("Agent Execution Complete")
-        print("=" * 60)
-        
-        print(f"\nExecution Summary:")
-        print(f"  - Messages: {len(result.get('messages', []))}")
-        print(f"  - Errors: {len(result.get('errors', []))}")
-        print(f"  - Decisions Made: {len(result.get('decision_log', []))}")
-        print(f"  - High Severity Found: {result.get('high_severity_found', False)}")
-        print(f"  - Report: {result.get('report', 'N/A')}")
-        
-        if result.get('decision_log'):
-            print(f"\nAgent Decision Log:")
-            for decision in result['decision_log']:
-                print(f"  - [{decision['timestamp']}] {decision['decision']}: {decision.get('action', 'N/A')}")
-        
-        if result.get('errors'):
-            print(f"\nErrors encountered:")
-            for error in result['errors']:
-                print(f"  - {error}")
-        
-        logger.info("Agent run completed successfully")
+def list_report_files(output_dir: Optional[Path] = None, limit: int = 12) -> List[Dict[str, Any]]:
+    target_dir = output_dir or PROJECT_DIR
+    reports = sorted(
+        target_dir.glob("Cyber_Threat_Report_*.pdf"),
+        key=lambda path: path.stat().st_mtime,
+        reverse=True,
+    )
+    return [_report_record(path) for path in reports[: max(limit, 1)]]
+
+
+def load_latest_run(path: Optional[Path] = None) -> Dict[str, Any]:
+    target = path or LATEST_RUN_FILE
+    if not target.exists():
+        return {}
+
+    try:
+        with target.open("r", encoding="utf-8") as handle:
+            payload = json.load(handle)
+            return payload if isinstance(payload, dict) else {}
+    except (json.JSONDecodeError, OSError):
+        return {}
+
+
+def save_latest_run(result: Dict[str, Any], path: Optional[Path] = None) -> str:
+    target = path or LATEST_RUN_FILE
+    with target.open("w", encoding="utf-8") as handle:
+        json.dump(result, handle, ensure_ascii=False, indent=2)
+    return str(target)
+
+
+def _step_label(step: str) -> str:
+    labels = {
+        "collect_news": "News collection",
+        "collect_blogs": "Blog collection",
+        "collect_cves": "CVE collection",
+        "summarize": "LLM summarization",
+        "memory": "Memory update",
+        "report": "Report generation",
+        "analyze": "Threat analysis",
+        "score": "Threat scoring",
+    }
+    return labels.get(step, step.replace("_", " ").strip().title())
+
+
+def _clean_detail_text(value: str, max_length: int = 260) -> str:
+    cleaned = re.sub(r"\s+", " ", value or "").strip()
+    if len(cleaned) <= max_length:
+        return cleaned
+    return cleaned[: max_length - 3].rstrip() + "..."
+
+
+def _sanitize_technical_details(value: str, max_length: int = 1200) -> str:
+    detail = (value or "").strip()
+    if not detail:
+        return "No additional technical details were captured."
+
+    lowered = detail.lower()
+    if "<html" in lowered or "<!doctype html" in lowered:
+        if "cloudflare" in lowered:
+            detail = "Cloudflare challenge page returned by remote source. Raw HTML omitted."
+        else:
+            detail = "Remote source returned an HTML response instead of structured feed content. Raw HTML omitted."
+    else:
+        detail = re.sub(r"\s+", " ", detail)
+
+    if len(detail) > max_length:
+        detail = detail[: max_length - 3].rstrip() + "..."
+    return detail
+
+
+def _build_operational_alert(step: str, exc: Exception, timestamp: str) -> Dict[str, Any]:
+    raw_message = str(exc).strip()
+    lowered = raw_message.lower()
+    label = _step_label(step)
+    severity = "medium"
+    summary = f"{label} failed"
+    detail = _clean_detail_text(raw_message)
+
+    if "cloudflare" in lowered and "403" in lowered:
+        summary = f"{label} failed - HTTP 403 (Cloudflare protection)"
+        detail = "Remote source returned a Cloudflare anti-bot challenge instead of the expected feed."
+        severity = "high"
+    elif "http 403" in lowered:
+        summary = f"{label} failed - HTTP 403"
+        detail = "Remote source rejected the request before content could be collected."
+        severity = "high"
+    elif "http 401" in lowered or "access denied" in lowered:
+        summary = f"{label} failed - access denied"
+        detail = "Authentication or upstream access policy blocked the request."
+        severity = "high"
+    elif "timed out" in lowered or "timeout" in lowered:
+        summary = f"{label} failed - request timed out"
+        detail = "The upstream request exceeded the configured timeout window."
+        severity = "medium"
+    elif "forbidden by its access permissions" in lowered or "winerror 10013" in lowered:
+        summary = f"{label} failed - network access blocked"
+        detail = "The current runtime environment could not establish the outbound network connection."
+        severity = "medium"
+    elif "name or service not known" in lowered or "temporary failure in name resolution" in lowered:
+        summary = f"{label} failed - DNS resolution issue"
+        detail = "The runtime could not resolve the upstream hostname."
+        severity = "medium"
+    elif step == "summarize":
+        summary = f"{label} failed - fallback summary used"
+        detail = "The model response could not be retrieved, so the deterministic summary path was used."
+        severity = "medium"
+
+    return {
+        "timestamp": timestamp,
+        "step": step,
+        "label": label,
+        "severity": severity,
+        "summary": summary,
+        "detail": detail,
+        "technical_details": _sanitize_technical_details(raw_message),
+    }
+
+
+@dataclass
+class AgentConfig:
+    goal: str = "Continuously identify, prioritize, and summarize the most actionable cyber threats."
+    news_days: int = _env_int("NEWS_DAYS", 2)
+    cve_days: int = _env_int("CVE_DAYS", 7)
+    top_threats: int = _env_int("TOP_THREATS", 10)
+    groq_api_key: str = os.getenv("GROQ_API_KEY", "").strip()
+    groq_model: str = os.getenv("GROQ_MODEL", "llama-3.1-8b-instant").strip()
+
+
+class GroqClient:
+    def __init__(self, api_key: str, model: str) -> None:
+        self.api_key = api_key
+        self.model = model
+        self.url = "https://api.groq.com/openai/v1/chat/completions"
+
+    def available(self) -> bool:
+        return bool(self.api_key and "replace_with" not in self.api_key)
+
+    def summarize(self, goal: str, top_threats: List[Dict[str, Any]]) -> str:
+        if not self.available() or not top_threats:
+            return ""
+
+        prompt = {
+            "goal": goal,
+            "top_threats": [
+                {
+                    "title": item.get("title"),
+                    "priority": item.get("priority"),
+                    "score": item.get("threat_score"),
+                    "summary": item.get("description") or item.get("content"),
+                    "severity": item.get("severity"),
+                    "source": item.get("source_name"),
+                    "related_cves": [cve.get("id") for cve in item.get("related_cves", []) if cve.get("id")],
+                }
+                for item in top_threats[:5]
+            ],
+        }
+
+        payload = {
+            "model": self.model,
+            "temperature": 0.2,
+            "messages": [
+                {
+                    "role": "system",
+                    "content": (
+                        "You are a cyber threat intelligence analyst. "
+                        "Return a concise executive summary using only the provided data. "
+                        "Use 3 to 5 short lines. No markdown bullets."
+                    ),
+                },
+                {
+                    "role": "user",
+                    "content": json.dumps(prompt, ensure_ascii=False),
+                },
+            ],
+        }
+        headers = {
+            "Authorization": f"Bearer {self.api_key}",
+            "Content-Type": "application/json",
+        }
+
+        data = request_json(
+            self.url,
+            method="POST",
+            headers=headers,
+            json_body=payload,
+            timeout=45,
+        )
+        return data["choices"][0]["message"]["content"].strip()
+
+
+class AutonomousCTIAgent:
+    def __init__(self, config: Optional[AgentConfig] = None) -> None:
+        self.config = config or AgentConfig()
+        self.llm = GroqClient(self.config.groq_api_key, self.config.groq_model)
+        self.decisions: List[Dict[str, Any]] = []
+        self.errors: List[str] = []
+        self.operational_alerts: List[Dict[str, Any]] = []
+
+    def _record_decision(self, step: str, detail: str) -> None:
+        self.decisions.append(
+            {
+                "timestamp": datetime.now(timezone.utc).isoformat(),
+                "step": step,
+                "detail": detail,
+            }
+        )
+        LOGGER.info("%s: %s", step, detail)
+
+    def _capture_error(self, step: str, exc: Exception) -> None:
+        timestamp = _utc_now_iso()
+        alert = _build_operational_alert(step, exc, timestamp)
+        self.errors.append(alert["summary"])
+        self.operational_alerts.append(alert)
+        LOGGER.exception("%s failed: %s", step, exc)
+
+    def collect_intelligence(self) -> Dict[str, List[Dict[str, Any]]]:
+        collectors = {
+            "news": lambda: get_news(days=self.config.news_days),
+            "blogs": fetch_security_blogs,
+            "cves": lambda: fetch_cve_data(days=self.config.cve_days),
+        }
+        results: Dict[str, List[Dict[str, Any]]] = {"news": [], "blogs": [], "cves": []}
+
+        with ThreadPoolExecutor(max_workers=3) as executor:
+            future_map = {executor.submit(func): name for name, func in collectors.items()}
+            for future in as_completed(future_map):
+                name = future_map[future]
+                try:
+                    results[name] = future.result()
+                    self._record_decision("collect", f"{name} collected: {len(results[name])} items")
+                except Exception as exc:
+                    self._capture_error(f"collect_{name}", exc)
+                    results[name] = []
+
+        return results
+
+    def analyze(self, collected: Dict[str, List[Dict[str, Any]]]) -> List[Dict[str, Any]]:
+        memory = load_memory()
+        memory_index = build_memory_index(memory)
+
+        dataset = build_threat_dataset(
+            collected.get("news", []),
+            collected.get("blogs", []),
+            collected.get("cves", []),
+        )
+        self._record_decision("analyze", f"dataset built: {len(dataset)} unique records")
+
+        scored = score_threats(
+            dataset,
+            known_titles=memory_index["titles"],
+            known_ids=memory_index["ids"],
+        )
+        self._record_decision("score", f"threats scored: {len(scored)}")
+        return scored
+
+    def decide_report_type(self, scored: List[Dict[str, Any]]) -> str:
+        if not scored:
+            report_type = "standard"
+        else:
+            critical_count = sum(1 for item in scored[:10] if item.get("priority") == "critical")
+            top_score = scored[0].get("threat_score", 0)
+            if critical_count >= 2 or top_score >= 90:
+                report_type = "urgent"
+            elif top_score >= 70:
+                report_type = "priority"
+            else:
+                report_type = "standard"
+
+        self._record_decision("decide", f"report type selected: {report_type}")
+        return report_type
+
+    def build_summary(self, top_threats: List[Dict[str, Any]]) -> str:
+        try:
+            summary = self.llm.summarize(self.config.goal, top_threats)
+            if summary:
+                self._record_decision("summarize", "llm summary generated")
+            else:
+                self._record_decision("summarize", "llm unavailable, using deterministic summary")
+            return summary
+        except Exception as exc:
+            self._capture_error("summarize", exc)
+            return ""
+
+    def persist(self, scored: List[Dict[str, Any]], report_content: str, report_type: str) -> Dict[str, Any]:
+        memory_result = update_memory(scored)
+        self._record_decision("memory", f"stored {memory_result['stored']} new records")
+
+        report_file = create_pdf(report_content, report_type=report_type, output_dir=PROJECT_DIR)
+        self._record_decision("report", f"pdf generated: {report_file}")
+        return {"memory": memory_result, "report_file": report_file}
+
+    def run(self, goal: Optional[str] = None) -> Dict[str, Any]:
+        if goal:
+            self.config.goal = goal
+            self._record_decision("goal", "custom mission goal received")
+
+        self._record_decision("start", "autonomous CTI run started")
+        collected = self.collect_intelligence()
+        scored = self.analyze(collected)
+        report_type = self.decide_report_type(scored)
+        top_threats = scored[: max(self.config.top_threats, 1)]
+        ai_summary = self.build_summary(top_threats)
+        recommendations = build_operational_recommendations(top_threats)
+        report_content = render_markdown_report(
+            goal=self.config.goal,
+            report_type=report_type,
+            top_threats=top_threats,
+            decisions=self.decisions,
+            errors=self.errors,
+            ai_summary=ai_summary,
+        )
+        persisted = self.persist(scored, report_content, report_type)
+        self._record_decision("finish", "autonomous CTI run completed")
+
+        result = {
+            "generated_at": _utc_now_iso(),
+            "goal": self.config.goal,
+            "report_type": report_type,
+            "top_threats": top_threats,
+            "decision_log": list(self.decisions),
+            "decision_breakdown": _decision_breakdown(self.decisions),
+            "errors": self.errors,
+            "operational_alerts": list(self.operational_alerts),
+            "memory": persisted["memory"],
+            "report": persisted["report_file"],
+            "report_filename": Path(persisted["report_file"]).name,
+            "report_markdown": report_content,
+            "executive_summary": ai_summary.strip(),
+            "operational_recommendations": recommendations,
+            "collected_counts": {name: len(items) for name, items in collected.items()},
+            "collected_items": collected,
+            "source_rollup": _source_rollup(collected),
+            "report_library": list_report_files(),
+        }
         return result
-        
-    except Exception as e:
-        logger.error(f"Fatal error in agent execution: {str(e)}", exc_info=True)
-        print(f"\nFatal Error: {str(e)}")
-        raise
+
+
+def run_ai_agent(goal: Optional[str] = None) -> Dict[str, Any]:
+    agent = AutonomousCTIAgent()
+    result = agent.run(goal=goal)
+    save_latest_run(result)
+
+    print("\nAutonomous CTI Agent Run Complete")
+    print(f"Goal: {result['goal']}")
+    print(f"Report Type: {result['report_type']}")
+    print(f"Collected: {result['collected_counts']}")
+    print(f"Top Threats: {len(result['top_threats'])}")
+    print(f"Report: {result['report']}")
+    if result["errors"]:
+        print(f"Errors: {len(result['errors'])}")
+    else:
+        print("Errors: 0")
+
+    return result
 
 
 if __name__ == "__main__":
